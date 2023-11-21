@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum ResourceType
 {
-    Mushroom, Wood, Stone, Iron
+    Mushroom, WoodPlank, Stone, IronIngot
 }
 
 public class Resource : MonoBehaviour
