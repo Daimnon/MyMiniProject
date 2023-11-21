@@ -1862,6 +1862,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 015e74f6dce3c6c4f8c4eaa62f333f4f, type: 3}
+--- !u!114 &269894463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6381697231555770809, guid: b5b64ce31f0feb94b877a572eda26536,
+    type: 3}
+  m_PrefabInstance: {fileID: 7599233835673280297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &270011352 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 463292, guid: 21e53c5ff3736aa4289660dcf65927fd,
@@ -3730,6 +3742,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e53c5ff3736aa4289660dcf65927fd, type: 3}
+--- !u!4 &662714358 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5422624482594111744, guid: 6bf1f74f1a1b0274e97d6741c79c5505,
+    type: 3}
+  m_PrefabInstance: {fileID: 2029067315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &671020763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 492872, guid: 015e74f6dce3c6c4f8c4eaa62f333f4f,
@@ -8162,6 +8180,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 797230853124949585, guid: 43cfd56858ba61d4ebfc1c0923a6f5bd,
+        type: 3}
+      propertyPath: _mainCamTr
+      value: 
+      objectReference: {fileID: 662714358}
     - target: {fileID: 1336682113178595924, guid: 43cfd56858ba61d4ebfc1c0923a6f5bd,
         type: 3}
       propertyPath: m_RootOrder
@@ -8227,6 +8250,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7385138235115690348, guid: 43cfd56858ba61d4ebfc1c0923a6f5bd,
+        type: 3}
+      propertyPath: _currencyTxt
+      value: 
+      objectReference: {fileID: 269894463}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

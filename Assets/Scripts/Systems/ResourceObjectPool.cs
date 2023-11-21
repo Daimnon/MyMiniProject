@@ -26,8 +26,6 @@ public class ResourceObjectPool : MonoBehaviour
 
     public Resource GetResourceFromPool(int resourceType)
     {
-        if (resourceType == 0) { Debug.LogError($"Sent resource was {(ResourceType)resourceType}"); return null; }
-
         for (int i = 0; i < _resourcePool.Count; i++)
         {
             if (_resourcePool[i].Type != (ResourceType)resourceType)
