@@ -5,10 +5,11 @@ using UnityEngine;
 
 public static class EventManager
 {
-    public static Action OnGameLaunched, OnLevelLaunched, OnOpenMenu, OnPayFirstResource;
+    public static Action OnGameLaunched, OnLevelLaunched, OnOpenMenu;
     public static Action<int> OnEarnCurrency;
     public static Action<PlayerInventory, int> OnPayCurrency;
     public static Action<Resource> OnTakeResource;
+    public static Action<PlayerInventory> OnPayFirstResource;
     public static Action<PlayerInventory, ResourceType> OnPayResource;
 
     public static void InvokeGameLaunched()
@@ -49,6 +50,14 @@ public static class EventManager
         {
             OnTakeResource?.Invoke(resource);
             UnityEngine.Debug.Log($"Event: TakeResource, Resource: {resource.Type.ToString()}");
+        }
+    }
+    public static void InvokePayFirstResource(PlayerInventory inventory)
+    {
+        if (inventory.Resources != null && inventory.Resources.Count > 0)
+        {
+            OnPayFirstResource?.Invoke(inventory);
+            UnityEngine.Debug.Log($"Event: PayResource, ResourceType: {inventory.Resources[0].Type.ToString()}");
         }
     }
     public static void InvokePayResource(PlayerInventory inventory, ResourceType wantedResource)
