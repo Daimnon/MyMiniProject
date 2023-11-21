@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5935520901325470062}
   - component: {fileID: 731104163591344878}
   m_Layer: 5
-  m_Name: Right Layout
+  m_Name: Right_Layout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

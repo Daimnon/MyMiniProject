@@ -1,10 +1,5 @@
 using UnityEngine;
 
-public enum ResourceType
-{
-    Mushroom, WoodPlank, Stone, IronIngot
-}
-
 public class Resource : MonoBehaviour
 {
     [SerializeField] private ResourceType _type;
