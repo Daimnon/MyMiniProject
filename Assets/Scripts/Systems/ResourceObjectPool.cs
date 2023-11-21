@@ -6,7 +6,6 @@ public class ResourceObjectPool : MonoBehaviour
 {
     [SerializeField] private Resource[] _resourcePrefabs;
     [SerializeField] private int _initialPoolSize = 200;
-    [SerializeField] float DespawnDelay = 10;
 
     private List<Resource> _resourcePool;
 
