@@ -29,7 +29,7 @@ public class CurrencyObjectPool : MonoBehaviour
             if (!currency.gameObject.activeSelf)
             {
                 currency.gameObject.SetActive(true);
-                ReturnResourceToPool(currency);
+                ReturnCurrencyToPool(currency);
                 return currency;
             }
         }
@@ -38,10 +38,10 @@ public class CurrencyObjectPool : MonoBehaviour
         Currency newCurrency = Instantiate(_currency);
         _currencyPool.Add(newCurrency);
         newCurrency.gameObject.SetActive(true);
-        ReturnResourceToPool(newCurrency);
+        ReturnCurrencyToPool(newCurrency);
         return newCurrency;
     }
-    public void ReturnResourceToPool(Currency currency)
+    public void ReturnCurrencyToPool(Currency currency)
     {
         currency.gameObject.SetActive(false);
         currency.transform.SetParent(transform);

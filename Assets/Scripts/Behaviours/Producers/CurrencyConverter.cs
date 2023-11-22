@@ -10,9 +10,6 @@ public class CurrencyConverter : MonoBehaviour
     [SerializeField] private Transform[] _productsTr;
     public Transform[] ProductsTr => _productsTr;
 
-    [SerializeField] private List<Currency> _convertedCurrency;
-    public List<Currency> ConvertedCurrency => _convertedCurrency;
-
     private CurrencyObjectPool _currencyObjectPool;
     private PlayerInventory _playerInventory;
 
@@ -26,6 +23,8 @@ public class CurrencyConverter : MonoBehaviour
     {
         if (_playerInventory == null)
             _playerInventory = other.GetComponent<PlayerInventory>();
+
+        // do entering animation on self
     }
     private void OnTriggerStay(Collider other)
     {
@@ -36,6 +35,8 @@ public class CurrencyConverter : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         _playerInventory = null;
+
+        // do exiting animation on self
     }
     private void ConvertCurrency(ResourceType resourceToConvert)
     {
