@@ -1234,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 5418855215932227602, guid: 3a5ba5fda8126094d8516d04ed1b7f4e,
         type: 3}
       propertyPath: m_Name
-      value: Producer_ResourceToCurrency
+      value: Converter_ResourceToCurrency
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
