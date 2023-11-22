@@ -29,7 +29,6 @@ public class CurrencyObjectPool : MonoBehaviour
             if (!currency.gameObject.activeSelf)
             {
                 currency.gameObject.SetActive(true);
-                ReturnCurrencyToPool(currency);
                 return currency;
             }
         }

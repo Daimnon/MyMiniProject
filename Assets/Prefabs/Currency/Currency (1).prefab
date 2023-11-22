@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4282512799375807085}
   - component: {fileID: 3787906960878515045}
   - component: {fileID: 4910859197275117557}
-  - component: {fileID: 8354227490883247634}
   - component: {fileID: 4824809197802628192}
+  - component: {fileID: 8354227490883247634}
   m_Layer: 0
   m_Name: Currency (1)
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3787906960878515045
 MeshFilter:
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8354227490883247634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8174088187435172536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d4c91eff55fa10408153bf6ccc949d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _worth: 1
-  _renderer: {fileID: 4910859197275117557}
 --- !u!65 &4824809197802628192
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -120,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.084472656, y: 0.013602614, z: 0.076538086}
   m_Center: {x: 0, y: 0.006801307, z: 0}
+--- !u!114 &8354227490883247634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174088187435172536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4c91eff55fa10408153bf6ccc949d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _worth: 1
+  _renderer: {fileID: 4910859197275117557}

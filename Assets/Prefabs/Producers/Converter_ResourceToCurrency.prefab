@@ -3592,7 +3592,7 @@ Transform:
   - {fileID: 5561903918910875951}
   - {fileID: 5576186389666102858}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &999926026987817018
 BoxCollider:
@@ -3810,7 +3810,7 @@ MonoBehaviour:
   - {fileID: 6303620121891972156}
   - {fileID: 3584960758579250448}
   - {fileID: 1935778659854188129}
-  _convertedCurrency: []
+  _conversionRates: 01000000020000000300000004000000
 --- !u!1 &5419887250513166916
 GameObject:
   m_ObjectHideFlags: 0

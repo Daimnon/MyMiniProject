@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 1482033480415497437}
   - component: {fileID: 5220554361604165390}
   - component: {fileID: 5462367335997840415}
+  - component: {fileID: 8942096623410584410}
   - component: {fileID: 6651857333720101100}
   - component: {fileID: 2161171637004170868}
   - component: {fileID: 7385138235115690348}
@@ -321,7 +322,7 @@ Transform:
   - {fileID: 6168501149337419230}
   - {fileID: 3614947929217220769}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1482033480415497437
 MeshFilter:
@@ -396,6 +397,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8942096623410584410
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4658901336399500275}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!195 &6651857333720101100
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -461,6 +489,8 @@ MonoBehaviour:
   - {fileID: 6389916883913427100}
   - {fileID: 4148002800108846814}
   - {fileID: 7028850009539997606}
+  _currencyObjectPool: {fileID: 0}
+  _resourceObjectPool: {fileID: 0}
   _canvasRTr: {fileID: 6168501149337419230}
   _currencyTxt: {fileID: 0}
   _resourceTxt: {fileID: 3161843829394331796}
