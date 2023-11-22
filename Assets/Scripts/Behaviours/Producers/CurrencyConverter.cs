@@ -50,4 +50,24 @@ public class CurrencyConverter : MonoBehaviour
             newCurrency.transform.position = _productsTr[i].position;
         }
     }
+    /*private void ConvertCurrency(ResourceType resourceToConvert) // trying to populate all positions instead of first positions testing requires resources onPlayer
+    {
+        int conversionRate = _conversionRates[(int)resourceToConvert];
+        int availableIndex = 0;
+        int amountConverted = 0;
+
+        while (amountConverted <= conversionRate && availableIndex < _productsTr.Length)
+        {
+            if (_productsTr[availableIndex].childCount > 0)
+            {
+                availableIndex++;
+                continue;
+            }
+
+            amountConverted++;
+            availableIndex++;
+            Currency newCurrency = _currencyObjectPool.GetCurrencyFromPool();
+            newCurrency.transform.SetParent(_productsTr[availableIndex]);
+        }
+    }*/
 }
