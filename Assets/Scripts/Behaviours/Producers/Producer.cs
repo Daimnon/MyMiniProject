@@ -14,11 +14,13 @@ public abstract class Producer : MonoBehaviour
     protected const string _playerTag = "Player";
     protected const string _resourceTag = "Resource";
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (PlayerInventory == null && other.CompareTag(_playerTag))
+            PlayerInventory = other.GetComponent<PlayerInventory>();
+    }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(_playerTag))
-            PlayerInventory = other.GetComponent<PlayerInventory>();
-
         ChargePrice();
     }
     private void OnTriggerExit(Collider other)

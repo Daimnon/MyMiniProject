@@ -14,6 +14,12 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private List<Transform> _resourcesTr;
     public List<Transform> ResourcesTr => _resourcesTr;
 
+    [SerializeField] private CurrencyObjectPool _currencyObjectPool;
+    public CurrencyObjectPool CurrencyObjectPool => _currencyObjectPool;
+
+    [SerializeField] private ResourceObjectPool _resourceObjectPool;
+    public ResourceObjectPool ResourceObjectPool => _resourceObjectPool;
+
     private List<Resource> _resources = new();
     public List<Resource> Resources => _resources;
 
@@ -73,6 +79,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         Resource resourceToPay = _resources[_resources.Count - 1];
+        _resourceObjectPool.ReturnResourceToPool(resourceToPay);
         _resources.Remove(resourceToPay);
         _resourceCount--;
         _canvasRTr.gameObject.SetActive(false);
