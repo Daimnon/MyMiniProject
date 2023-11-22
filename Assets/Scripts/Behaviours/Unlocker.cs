@@ -13,13 +13,16 @@ public class Unlocker : MonoBehaviour
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (_playerInventory == null && other.CompareTag(_playerTag))
             _playerInventory = other.GetComponent<PlayerInventory>();
-
-        EventManager.InvokePayCurrency(_playerInventory, _amountToCharge);
-        _priceToUnlock -= _amountToCharge;
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        int paidAmount = _playerInventory.PayCurrency(_amountToCharge);
+        EventManager.InvokePayCurrency(paidAmount);
+        _priceToUnlock -= paidAmount;
         _currentPriceTxt.text = _priceToUnlock.ToString();
 
         if (_priceToUnlock <= 0)
