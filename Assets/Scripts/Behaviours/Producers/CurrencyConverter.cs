@@ -41,7 +41,7 @@ public class CurrencyConverter : MonoBehaviour
 
         // do exiting animation on self
     }
-    private void ConvertCurrency(ResourceType resourceToConvert)
+    /*private void ConvertCurrency(ResourceType resourceToConvert)
     {
         int conversionRate = _conversionRates[(int)resourceToConvert];
         for (int i = 0; i < conversionRate; i++)
@@ -49,8 +49,8 @@ public class CurrencyConverter : MonoBehaviour
             Currency newCurrency = _currencyObjectPool.GetCurrencyFromPool();
             newCurrency.transform.position = _productsTr[i].position;
         }
-    }
-    /*private void ConvertCurrency(ResourceType resourceToConvert) // trying to populate all positions instead of first positions testing requires resources onPlayer
+    }*/
+    private void ConvertCurrency(ResourceType resourceToConvert) // trying to populate all positions instead of first positions testing requires resources onPlayer
     {
         int conversionRate = _conversionRates[(int)resourceToConvert];
         int availableIndex = 0;
@@ -64,10 +64,10 @@ public class CurrencyConverter : MonoBehaviour
                 continue;
             }
 
-            amountConverted++;
-            availableIndex++;
             Currency newCurrency = _currencyObjectPool.GetCurrencyFromPool();
             newCurrency.transform.SetParent(_productsTr[availableIndex]);
+            amountConverted++;
+            availableIndex++;
         }
-    }*/
+    }
 }

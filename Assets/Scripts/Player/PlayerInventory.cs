@@ -20,10 +20,10 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private ResourceObjectPool _resourceObjectPool;
     public ResourceObjectPool ResourceObjectPool => _resourceObjectPool;
 
-    private List<Resource> _resources = new(); // testing requires serialization
+    [SerializeField] private List<Resource> _resources = new(); // testing requires serialization
     public List<Resource> Resources => _resources;
 
-    private int _resourceCount = 0; // testing requires serialization
+    [SerializeField] private int _resourceCount = 0; // testing requires serialization
     public int ResourceCount => _resourceCount;
 
     [Header("UI")]
