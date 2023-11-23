@@ -35,7 +35,6 @@ public class ResourceObjectPool : MonoBehaviour
             if (!resource.gameObject.activeSelf)
             {
                 resource.gameObject.SetActive(true);
-                ReturnResourceToPool(resource);
                 return resource;
             }
         }
