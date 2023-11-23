@@ -420,9 +420,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!195 &6651857333720101100
 NavMeshAgent:
@@ -491,6 +491,8 @@ MonoBehaviour:
   - {fileID: 7028850009539997606}
   _currencyObjectPool: {fileID: 0}
   _resourceObjectPool: {fileID: 0}
+  _resources: []
+  _resourceCount: 0
   _canvasRTr: {fileID: 6168501149337419230}
   _currencyTxt: {fileID: 0}
   _resourceTxt: {fileID: 3161843829394331796}
