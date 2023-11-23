@@ -64,8 +64,9 @@ public class CurrencyConverter : MonoBehaviour
                 continue;
             }
 
-            Currency newCurrency = _currencyObjectPool.GetCurrencyFromPool();
-            newCurrency.transform.SetParent(_productsTr[availableIndex]);
+            Transform newCurrencyTr = _currencyObjectPool.GetCurrencyFromPool().transform;
+            newCurrencyTr.SetParent(_productsTr[availableIndex]);
+            newCurrencyTr.localPosition = Vector3.zero;
             amountConverted++;
             availableIndex++;
         }
