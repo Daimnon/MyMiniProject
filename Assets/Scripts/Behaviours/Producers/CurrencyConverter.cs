@@ -14,13 +14,16 @@ public class CurrencyConverter : MonoBehaviour
     
     private CurrencyObjectPool _currencyObjectPool;
     private PlayerInventory _playerInventory;
-
+    private const string _playerTag = "Player";
     private void Start()
     {
         _currencyObjectPool = GameManager.Instance.CurrencyPool;
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag(_playerTag))
+            return;
+
         if (_playerInventory == null)
             _playerInventory = other.GetComponent<PlayerInventory>();
 
@@ -28,7 +31,10 @@ public class CurrencyConverter : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (_playerInventory.ResourceCount <= 0)
+        if (!other.CompareTag(_playerTag))
+            return;
+
+        if (_playerInventory != null && _playerInventory.ResourceCount <= 0)
             return;
 
         Resource convertedResource = _playerInventory.PayFirstResource();
@@ -37,6 +43,9 @@ public class CurrencyConverter : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
+        if (!other.CompareTag(_playerTag))
+            return;
+
         _playerInventory = null;
 
         // do exiting animation on self
