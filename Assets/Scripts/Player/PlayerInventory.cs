@@ -59,14 +59,15 @@ public class PlayerInventory : MonoBehaviour
         _resources.Add(newResource);
         _resourceCount++;
 
-        newResource.transform.position = _resourcesTr[_resourceCount - 1].position;
-        newResource.transform.SetParent(_resourcesTr[_resourceCount - 1]);
+        int lastResourceIndex = _resourceCount - 1;
+        newResource.transform.position = _resourcesTr[lastResourceIndex].position;
+        newResource.transform.SetParent(_resourcesTr[lastResourceIndex]);
 
         if (_resources.Count == _carryLimit)
         {
             string maxItemCountTxt = _carryLimit.ToString();
             _resourceTxt.text = maxItemCountTxt + "/" + maxItemCountTxt;
-            _canvasRTr.anchoredPosition = new Vector2(0, _resources[_resourceCount - 1].transform.position.y);
+            _canvasRTr.anchoredPosition = new Vector2(0, _resources[lastResourceIndex].transform.position.y);
             _canvasRTr.gameObject.SetActive(true);
         }
     }

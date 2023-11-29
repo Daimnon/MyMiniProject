@@ -4,32 +4,44 @@ using UnityEngine;
 
 public abstract class Producer : MonoBehaviour
 {
+    public abstract ResourceObjectPool ResourcePool { get; set; }
     public abstract ProducerType Type { get; }
-    public abstract GameObject ProductPrefab { get; }
+    public abstract int MaxProducts { get; set; }
+    public abstract float ProductionTime { get; }
+    public abstract bool IsFull { get; set; }
     public abstract Transform[] ProductsTr { get; }
+    public abstract List<Resource> Products { get; }
 
-    public abstract List<Resource> Products { get; set; }
-    public abstract PlayerInventory PlayerInventory { get; set; }
-
-    protected const string _playerTag = "Player";
-    protected const string _resourceTag = "Resource";
-
-    private void OnTriggerEnter(Collider other)
+    private void GiveProduct(PlayerInventory inventory)
     {
-        if (PlayerInventory == null && other.CompareTag(_playerTag))
-            PlayerInventory = other.GetComponent<PlayerInventory>();
+        Resource lastResource = Products[^1];
+        inventory.TakeResource(lastResource);
+        Products.Remove(lastResource);
     }
-    private void OnTriggerStay(Collider other)
+    protected void Initialize()
     {
-        ChargePrice();
+        if (!ResourcePool)
+            ResourcePool = GameManager.Instance.ResourcePool;
     }
-    private void OnTriggerExit(Collider other)
+    public void Produce()
     {
-        StopCharging();
-        PlayerInventory = null;
-    }
+        if (IsFull)
+            return;
 
-    public abstract void ChargePrice();
-    public abstract void StopCharging();
-    public abstract void ProduceProduct();
+        for (int i = 0; i < ProductsTr.Length && ProductsTr[i].childCount < 1; i++)
+        {
+            int resourceIndex = (int)Type;
+            Resource newResource = ResourcePool.GetResourceFromPool(resourceIndex);
+            newResource.transform.position = ProductsTr[i].position;
+            Products.Add(newResource);
+
+            if (i == MaxProducts)
+                IsFull = true;
+
+            break;
+        }
+
+        if (!IsFull)
+            Invoke(nameof(Produce), ProductionTime);
+    }
 }
