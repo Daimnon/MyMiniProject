@@ -28,9 +28,10 @@ public class MagicProducer : Producer
     private List<Resource> _products;
     public override List<Resource> Products => _products;
 
-    private void Awake()
+    private void Start()
     {
         Initialize();
+        Produce();
     }
 
     public override void Produce()
