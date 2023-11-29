@@ -32,4 +32,26 @@ public class MagicProducer : Producer
     {
         Initialize();
     }
+
+    public override void Produce()
+    {
+        if (_isFull)
+            return;
+
+        for (int i = 0; i < _productsTr.Length && _productsTr[i].childCount < 1; i++)
+        {
+            int resourceIndex = (int)_type;
+            Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
+            newResource.transform.position = _productsTr[i].position;
+            _products.Add(newResource);
+
+            if (i == _maxProducts)
+                _isFull = true;
+
+            break;
+        }
+
+        if (!_isFull)
+            Invoke(nameof(Produce), _productionTime);
+    }
 }
