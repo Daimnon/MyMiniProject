@@ -194,6 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139756991}
+  - component: {fileID: 139756992}
   m_Layer: 0
   m_Name: Magic_Fountain
   m_TagString: Untagged
@@ -218,6 +219,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &139756992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139756990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddb5957604340d4ca1482207621cc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourcePool: {fileID: 5122770068513668028}
+  _type: 0
+  _maxProducts: 3
+  _productionTime: 0.1
+  _isFull: 0
+  _productsTr: []
 --- !u!1001 &139917150
 PrefabInstance:
   m_ObjectHideFlags: 0

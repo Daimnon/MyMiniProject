@@ -5,17 +5,19 @@ using UnityEngine;
 public enum ResourceType
 {
     Mushroom, 
-    WoodPlank, 
-    Stone, 
-    IronChain
+    Coal,
+    Iron,
+    Magic,
+    Leather
 }
 
 public enum ProducerType
 {
     MushroomCluster,
-    Tree,
-    Quarry,
-    Forge
+    CoalMine,
+    Forge,
+    MagicFountain,
+    Dragon
 }
 
 public class GameManager : MonoBehaviour
