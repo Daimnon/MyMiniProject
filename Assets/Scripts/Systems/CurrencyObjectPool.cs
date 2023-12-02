@@ -9,7 +9,16 @@ public class CurrencyObjectPool : MonoBehaviour
 
     private List<Currency> _currencyPool;
 
-    private void Start()
+    private void OnEnable()
+    {
+        EventManager.OnLevelLaunched += OnLevelLaunched;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnLevelLaunched -= OnLevelLaunched;
+    }
+
+    private void Initialize()
     {
         _currencyPool = new List<Currency>();
 
@@ -45,5 +54,10 @@ public class CurrencyObjectPool : MonoBehaviour
         currency.gameObject.SetActive(false);
         currency.transform.SetParent(transform);
         currency.transform.position = Vector3.zero;
+    }
+
+    private void OnLevelLaunched()
+    {
+        Initialize();
     }
 }

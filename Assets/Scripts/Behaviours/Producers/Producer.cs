@@ -15,7 +15,7 @@ public abstract class Producer : MonoBehaviour
     public abstract void Produce();
     protected void Initialize()
     {
-        if (!ResourcePool)
+        if (!ResourcePool && GameManager.Instance.ResourcePool)
             ResourcePool = GameManager.Instance.ResourcePool;
     }
     private void GiveProduct(PlayerInventory inventory)

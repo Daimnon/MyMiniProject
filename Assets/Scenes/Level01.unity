@@ -226,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 139756991}
   - component: {fileID: 139756992}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Magic_Fountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 158902, guid: 5e22e4d99a247cd4c9a658bbd549bc33, type: 3}
       propertyPath: m_Name
       value: SM_Env_ReinforedPole_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 158902, guid: 5e22e4d99a247cd4c9a658bbd549bc33, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 481370, guid: 5e22e4d99a247cd4c9a658bbd549bc33, type: 3}
       propertyPath: m_RootOrder
@@ -387,6 +391,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_StoneTable_01
       objectReference: {fileID: 0}
+    - target: {fileID: 141482, guid: 16b5a7abcb1d9cb438b51c495e76eb52, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 405634, guid: 16b5a7abcb1d9cb438b51c495e76eb52, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -462,7 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 401283903}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Legendary_Weapons_Rack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,6 +588,10 @@ PrefabInstance:
     - target: {fileID: 198518, guid: 1903e8058f802aa478acc8399cd3ac74, type: 3}
       propertyPath: m_Name
       value: SM_Prop_WeaponRack_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 198518, guid: 1903e8058f802aa478acc8399cd3ac74, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 492276, guid: 1903e8058f802aa478acc8399cd3ac74, type: 3}
       propertyPath: m_RootOrder
@@ -802,7 +814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 544934065}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Coal_Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,6 +980,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Rock_Flat_03
       objectReference: {fileID: 0}
+    - target: {fileID: 167114, guid: 7473a5138ccf3844a9cd93d43675b88e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 484294, guid: 7473a5138ccf3844a9cd93d43675b88e, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -1128,7 +1144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857194996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enchanting_Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1461,7 +1477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1002311811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapons_Rack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1851,6 +1867,10 @@ PrefabInstance:
     - target: {fileID: 187418, guid: 315b65f382572af4b89cde35ba50cbfb, type: 3}
       propertyPath: m_Name
       value: SM_Env_Stalactite_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 187418, guid: 315b65f382572af4b89cde35ba50cbfb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 440356, guid: 315b65f382572af4b89cde35ba50cbfb, type: 3}
       propertyPath: m_RootOrder
@@ -2375,6 +2395,10 @@ PrefabInstance:
     - target: {fileID: 142700, guid: 14a2a6aefc4a6e7469991cd18bc527d1, type: 3}
       propertyPath: m_Name
       value: SM_Env_Volcanic_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 142700, guid: 14a2a6aefc4a6e7469991cd18bc527d1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 495216, guid: 14a2a6aefc4a6e7469991cd18bc527d1, type: 3}
       propertyPath: m_RootOrder
@@ -3417,6 +3441,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232455301174556613, guid: b5b64ce31f0feb94b877a572eda26536,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7429429674054632930, guid: b5b64ce31f0feb94b877a572eda26536,
         type: 3}

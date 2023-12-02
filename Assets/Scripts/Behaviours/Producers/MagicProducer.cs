@@ -18,7 +18,7 @@ public class MagicProducer : Producer
     [SerializeField] private float _productionTime = 0.1f;
     public override float ProductionTime => _productionTime;
 
-    [SerializeField] private bool _isFull;
+    [SerializeField] private bool _isFull = false;
     public override bool IsFull { get => _isFull; set => _isFull = value; }
 
     [Header("Product placements")]
@@ -28,6 +28,10 @@ public class MagicProducer : Producer
     private List<Resource> _products;
     public override List<Resource> Products => _products;
 
+    private void Awake()
+    {
+        _products = new List<Resource>();
+    }
     private void Start()
     {
         Initialize();
@@ -39,17 +43,16 @@ public class MagicProducer : Producer
         if (_isFull)
             return;
 
-        for (int i = 0; i < _productsTr.Length && _productsTr[i].childCount < 1; i++)
+        int productCount = _products.Count;
+        if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
         {
             int resourceIndex = (int)_type;
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
-            newResource.transform.position = _productsTr[i].position;
+            newResource.transform.position = _productsTr[productCount].position;
             _products.Add(newResource);
 
-            if (i == _maxProducts)
+            if (productCount == _maxProducts)
                 _isFull = true;
-
-            break;
         }
 
         if (!_isFull)

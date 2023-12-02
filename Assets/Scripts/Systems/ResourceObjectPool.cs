@@ -9,10 +9,21 @@ public class ResourceObjectPool : MonoBehaviour
 
     private List<Resource> _resourcePool;
 
-    private void Start()
+    private void Awake()
     {
         _resourcePool = new List<Resource>();
+    }
+    private void OnEnable()
+    {
+        EventManager.OnLevelLaunched += OnLevelLaunched;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnLevelLaunched -= OnLevelLaunched;
+    }
 
+    private void Initialize()
+    {
         for (int i = 0; i < _resourcePrefabs.Length; i++)
         {
             for (int j = 0; j < _initialPoolSize; j++)
@@ -23,7 +34,7 @@ public class ResourceObjectPool : MonoBehaviour
             }
         }
     }
-
+    
     public Resource GetResourceFromPool(int resourceType)
     {
         for (int i = 0; i < _resourcePool.Count; i++)
@@ -40,10 +51,9 @@ public class ResourceObjectPool : MonoBehaviour
         }
 
         // If no inactive money objects are available, create a new one
-        Resource newResource = Instantiate(_resourcePrefabs[resourceType]);
+        Resource newResource = Instantiate(_resourcePrefabs[resourceType], transform);
         _resourcePool.Add(newResource);
         newResource.gameObject.SetActive(true);
-        ReturnResourceToPool(newResource);
         return newResource;
     }
     public void ReturnResourceToPool(Resource resource)
@@ -51,5 +61,10 @@ public class ResourceObjectPool : MonoBehaviour
         resource.gameObject.SetActive(false);
         resource.transform.SetParent(transform);
         resource.transform.position = Vector3.zero;
+    }
+
+    private void OnLevelLaunched()
+    {
+        Initialize();
     }
 }
