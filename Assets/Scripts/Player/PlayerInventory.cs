@@ -103,7 +103,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
             }
 
-            if (i == _resources.Count - 1 && _resources[i].Type != wantedReseource)
+            if (i == _resources.Count - 1 && _resources[i].Type != wantedReseource) // no resource
                 return null;
         }
 
