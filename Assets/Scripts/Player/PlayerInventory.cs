@@ -95,7 +95,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         Resource resourceToGive = null;
-        for (int i = 0; i < _resources.Count; i++)
+        for (int i = _resources.Count - 1; i >= 0; i--)
         {
             if (_resources[i].Type == wantedReseource)
             {
@@ -103,7 +103,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
             }
 
-            if (i == _resources.Count - 1 && _resources[i].Type != wantedReseource) // no resource
+            if (i == 0 && _resources[i].Type != wantedReseource) // no resource
                 return null;
         }
 

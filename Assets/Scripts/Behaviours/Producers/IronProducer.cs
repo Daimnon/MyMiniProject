@@ -8,6 +8,9 @@ public class IronProducer : Producer
     [SerializeField] private ResourceObjectPool _resourcePool;
     public override ResourceObjectPool ResourcePool { get => _resourcePool; set => _resourcePool = value; }
 
+    [SerializeField] private FuelStove _engine;
+    public FuelStove Engine => _engine;
+
     [Header("Production Details")]
     [SerializeField] private ProducerType _type;
     public override ProducerType Type => _type;
@@ -28,9 +31,18 @@ public class IronProducer : Producer
     private List<Resource> _products;
     public override List<Resource> Products => _products;
 
+    private void Awake()
+    {
+        _products = new List<Resource>();
+    }
+    private void Start()
+    {
+        Initialize();
+    }
     public override void Produce() // need to modify for fuel usage
     {
-        if (_isFull)
+        int convertedCoal = _engine.ConvertedCoal;
+        if (_isFull || convertedCoal < 1)
             return;
 
         int productCount = _products.Count;
@@ -40,6 +52,7 @@ public class IronProducer : Producer
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
             newResource.transform.position = _productsTr[productCount].position;
             _products.Add(newResource);
+            convertedCoal--;
 
             if (productCount == _maxProducts)
                 _isFull = true;
@@ -47,5 +60,11 @@ public class IronProducer : Producer
 
         if (!_isFull)
             Invoke(nameof(Produce), _productionTime);
+    }
+
+    private IEnumerator WaitForProduction()
+    {
+        yield return new WaitUntil(() => _engine.ConvertedCoal > 0);
+        Produce();
     }
 }
