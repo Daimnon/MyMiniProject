@@ -5,12 +5,22 @@ public class Resource : MonoBehaviour
     [SerializeField] private ResourceType _type;
     public ResourceType Type => _type;
 
-    [SerializeField] public Renderer _renderer;
+    [SerializeField] private Renderer _renderer;
+    [SerializeField] private bool _isInInventory = false;
 
     private const string _playerTag = "Player";
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // might conflict with producer's trigger - take notice.
     {
-        if (!other.CompareTag(_playerTag))
-            return;
+        if (!_isInInventory && other.CompareTag(_playerTag))
+        {
+            PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
+            Pickup(playerInventory);
+        }
+    }
+
+    private void Pickup(PlayerInventory playerInventory)
+    {
+        playerInventory.TakeResource(this);
+        _isInInventory = true;
     }
 }

@@ -12,7 +12,7 @@ public class FuelStove : MonoBehaviour
 
     [Header("Converted Coal")]
     [SerializeField] private int _convertedCoal = 0;
-    public int ConvertedCoal => _convertedCoal;
+    public int ConvertedCoal  => _convertedCoal;
 
     [SerializeField] private float _productionTime = 0.5f;
     public float ProductionTime => _productionTime;
@@ -68,16 +68,21 @@ public class FuelStove : MonoBehaviour
 
     public void ConvertCoal() // need to modify for fuel usage
     {
-        if (_coal.Count < 1 ||_convertedCoal >= _maxCoal)
+        if (_coal.Count < 1 || _convertedCoal >= _maxCoal)
         {
             StartCoroutine(WaitForCoal());
             return;
         }
 
         _convertedCoal++;
+        _coal.RemoveAt(0);
         // do burning vfx
 
         Invoke(nameof(ConvertCoal), _productionTime);
+    }
+    public void UseConvertedCoal()
+    {
+        _convertedCoal--;
     }
     private IEnumerator WaitForCoal()
     {

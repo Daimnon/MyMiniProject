@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class IronProducer : Producer
 {
@@ -31,6 +32,9 @@ public class IronProducer : Producer
     private List<Resource> _products;
     public override List<Resource> Products => _products;
 
+    private const string _playerTag = "Player";
+    private PlayerInventory _playerInventory;
+
     private void Awake()
     {
         _products = new List<Resource>();
@@ -38,12 +42,43 @@ public class IronProducer : Producer
     private void Start()
     {
         Initialize();
+        Produce();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(_playerTag))
+            _playerInventory = other.GetComponent<PlayerInventory>();
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (!_playerInventory)
+            return;
+
+        if (_products.Count > 0)
+            GiveIron();
+        else
+            Debug.Log("Gave all iron!");
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(_playerTag))
+            _playerInventory = null;
+    }
+
     public override void Produce() // need to modify for fuel usage
     {
         int convertedCoal = _engine.ConvertedCoal;
-        if (_isFull || convertedCoal < 1)
+
+        if (_isFull)
+        {
+            StartCoroutine(WaitForProductionSpace());
             return;
+        }
+        else if (convertedCoal < 1)
+        {
+            StartCoroutine(WaitForProduction());
+            return;
+        }
 
         int productCount = _products.Count;
         if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
@@ -51,20 +86,33 @@ public class IronProducer : Producer
             int resourceIndex = (int)_type;
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
             newResource.transform.position = _productsTr[productCount].position;
+            _engine.UseConvertedCoal();
             _products.Add(newResource);
-            convertedCoal--;
 
             if (productCount == _maxProducts)
                 _isFull = true;
         }
 
-        if (!_isFull)
-            Invoke(nameof(Produce), _productionTime);
+        Invoke(nameof(Produce), _productionTime);
     }
 
     private IEnumerator WaitForProduction()
     {
         yield return new WaitUntil(() => _engine.ConvertedCoal > 0);
         Produce();
+    }
+    private IEnumerator WaitForProductionSpace()
+    {
+        yield return new WaitUntil(() => _engine.ConvertedCoal < _maxProducts);
+        StartCoroutine(WaitForProduction());
+    }
+
+    private void GiveIron()
+    {
+        if (_products.Count > 0)
+        {
+            _playerInventory.TakeResource(_products[0]);
+            _products.RemoveAt(0);
+        }
     }
 }
