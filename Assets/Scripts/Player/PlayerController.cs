@@ -11,7 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TouchFloatStick _stick;
     [SerializeField] private Vector2 _stickSize = new(300.0f, 300.0f);
     [SerializeField] private Vector2 _screenOffsetMargin = new(100.0f, 50.0f);
+    [SerializeField] private float _idleGestureTime = 7.5f;
     [SerializeField] private NavMeshAgent _agent;
+
+    private float _idleTime = 0.0f;
+    private bool _isGesturing = false;
 
     private Finger _moveFinger;
     private Vector3 _fingerMoveAmount;
@@ -32,6 +36,24 @@ public class PlayerController : MonoBehaviour
         _agent.Move(scaledMovement);
 
         _playerAnimator.SetFloat("Move Speed", scaledMovement.normalized.magnitude);
+
+        if (scaledMovement == Vector3.zero)
+        {
+            _idleTime += Time.deltaTime;
+
+            if (_idleTime >= _idleGestureTime && !_isGesturing)
+            {
+                _isGesturing = true;
+                _playerAnimator.SetBool("Is Gesturing", _isGesturing);
+            }
+        }
+        else if (_idleTime != 0)
+        {
+            _idleTime = 0;
+
+            _isGesturing = false;
+            _playerAnimator.SetBool("Is Gesturing", _isGesturing);
+        }
     }
     private void OnDisable()
     {
