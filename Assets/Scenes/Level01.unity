@@ -132,8 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 21179320}
-  - component: {fileID: 21179319}
   - component: {fileID: 21179318}
+  - component: {fileID: 21179319}
   m_Layer: 0
   m_Name: Forge
   m_TagString: Untagged
@@ -2517,11 +2517,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93180567ee0128143b5f1c8bc54cdd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceObjectPool: {fileID: 0}
-  _convertedCoal: 0
-  _maxConvertedCoal: 3
-  _productionTime: 0.5
+  _resourceObjectPool: {fileID: 5122770068513668028}
+  _forge: {fileID: 21179319}
+  _maxCoal: 3
   _isFull: 0
+  _convertedCoal: 0
+  _productionTime: 0.5
 --- !u!1 &1330498854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,10 +2667,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceObjectPool: {fileID: 5122770068513668028}
-  _convertedCoal: 0
-  _maxConvertedCoal: 3
-  _productionTime: 0.5
+  _forge: {fileID: 21179319}
+  _maxCoal: 3
   _isFull: 0
+  _convertedCoal: 0
+  _productionTime: 0.5
 --- !u!65 &1469012743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4195,6 +4197,11 @@ PrefabInstance:
       objectReference: {fileID: 1566150557}
     - target: {fileID: 4968778437675031545, guid: ab951ae5b679a414183e3a370569b3be,
         type: 3}
+      propertyPath: _resourceCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968778437675031545, guid: ab951ae5b679a414183e3a370569b3be,
+        type: 3}
       propertyPath: _currencyObjectPool
       value: 
       objectReference: {fileID: 2354691103924192078}
@@ -4208,10 +4215,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Testing Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6991017528815563407, guid: ab951ae5b679a414183e3a370569b3be,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 24d70ee334f39ec4e82417fbaa9d45e3, type: 2}
+    - target: {fileID: 6991017528815563407, guid: ab951ae5b679a414183e3a370569b3be,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'thumb_01_l'\n\tTransform 'spine_02'\n\tTransform
+        'thumb_01_r'\n\tTransform 'thigh_l'\n\tTransform 'calf_l'\n\tTransform 'spine_01'\n\tTransform
+        'clavicle_r'\n\tTransform 'hand_l'\n\tTransform 'lowerarm_l'\n\tTransform
+        'index_01_l'\n\tand more ...\n\tFrom animation clip 'Anim_Idle'\n\tFrom animation
+        clip 'Anim_Idle_Holding'\n\tFrom animation clip 'Anim_Idle_Gesture'"
+      objectReference: {fileID: 0}
     - target: {fileID: 7979109053347322048, guid: ab951ae5b679a414183e3a370569b3be,
         type: 3}
       propertyPath: m_Constraints
-      value: 80
+      value: 94
       objectReference: {fileID: 0}
     - target: {fileID: 7979109053347322048, guid: ab951ae5b679a414183e3a370569b3be,
         type: 3}

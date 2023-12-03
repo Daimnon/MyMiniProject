@@ -103,8 +103,11 @@ public class PlayerInventory : MonoBehaviour
                 break;
             }
 
-            if (i == 0 && _resources[i].Type != wantedReseource) // no resource
+            if (i == 0 && _resources[i].Type != wantedReseource)
+            {
+                Debug.Log("Resource type not found.");
                 return null;
+            }
         }
 
         _resources.Remove(resourceToGive);

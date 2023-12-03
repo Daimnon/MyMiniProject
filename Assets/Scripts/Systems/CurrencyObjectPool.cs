@@ -9,6 +9,10 @@ public class CurrencyObjectPool : MonoBehaviour
 
     private List<Currency> _currencyPool;
 
+    private void Awake()
+    {
+        _currencyPool = new List<Currency>();
+    }
     private void OnEnable()
     {
         EventManager.OnLevelLaunched += OnLevelLaunched;

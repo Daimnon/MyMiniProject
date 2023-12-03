@@ -34,7 +34,7 @@ public class CurrencyConverter : MonoBehaviour
         if (!other.CompareTag(_playerTag))
             return;
 
-        if (_playerInventory != null && _playerInventory.ResourceCount <= 0)
+        if (_playerInventory != null && _playerInventory.ResourceCount < 1)
             return;
 
         Resource convertedResource = _playerInventory.PayFirstResource();
