@@ -3316,6 +3316,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bf1f74f1a1b0274e97d6741c79c5505, type: 3}
+--- !u!95 &2038092518 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6991017528815563407, guid: ab951ae5b679a414183e3a370569b3be,
+    type: 3}
+  m_PrefabInstance: {fileID: 4190523993276758941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2042147296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4135,6 +4141,16 @@ PrefabInstance:
       propertyPath: _stick
       value: 
       objectReference: {fileID: 2055452291}
+    - target: {fileID: 1673996248670187810, guid: ab951ae5b679a414183e3a370569b3be,
+        type: 3}
+      propertyPath: _playerAnimator
+      value: 
+      objectReference: {fileID: 2038092518}
+    - target: {fileID: 4283086431648867898, guid: ab951ae5b679a414183e3a370569b3be,
+        type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4340682707595503192, guid: ab951ae5b679a414183e3a370569b3be,
         type: 3}
       propertyPath: m_RootOrder
@@ -4223,13 +4239,7 @@ PrefabInstance:
     - target: {fileID: 6991017528815563407, guid: ab951ae5b679a414183e3a370569b3be,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'thumb_01_l'\n\tTransform 'spine_02'\n\tTransform
-        'thumb_01_r'\n\tTransform 'thigh_l'\n\tTransform 'calf_l'\n\tTransform 'spine_01'\n\tTransform
-        'clavicle_r'\n\tTransform 'hand_l'\n\tTransform 'lowerarm_l'\n\tTransform
-        'index_01_l'\n\tand more ...\n\tFrom animation clip 'Anim_Idle'\n\tFrom animation
-        clip 'Anim_Idle_Holding'\n\tFrom animation clip 'Anim_Idle_Gesture'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7979109053347322048, guid: ab951ae5b679a414183e3a370569b3be,
         type: 3}

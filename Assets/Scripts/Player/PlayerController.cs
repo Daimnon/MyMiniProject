@@ -7,11 +7,11 @@ using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Animator _playerAnimator;
     [SerializeField] private TouchFloatStick _stick;
     [SerializeField] private Vector2 _stickSize = new(300.0f, 300.0f);
     [SerializeField] private Vector2 _screenOffsetMargin = new(100.0f, 50.0f);
     [SerializeField] private NavMeshAgent _agent;
-    //[SerializeField] Animator _playerAnimator;
 
     private Finger _moveFinger;
     private Vector3 _fingerMoveAmount;
@@ -30,14 +30,7 @@ public class PlayerController : MonoBehaviour
         _agent.transform.LookAt(_agent.transform.position + scaledMovement, Vector3.up);
         _agent.Move(scaledMovement);
 
-        /*if (scaledMovement == Vector3.zero)
-        {
-            _playerAnimator.SetBool("isWalking", false);
-        }
-        else
-        {
-            _playerAnimator.SetBool("isWalking", true);
-        }*/
+        _playerAnimator.SetFloat("Move Speed", scaledMovement.normalized.magnitude);
     }
     private void OnDisable()
     {
