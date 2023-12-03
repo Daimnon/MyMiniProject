@@ -35,6 +35,7 @@ public class FuelStove : MonoBehaviour
     private void Start()
     {
         Initialize();
+        ConvertCoal();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -71,15 +72,20 @@ public class FuelStove : MonoBehaviour
 
     public void ConvertCoal() // need to modify for fuel usage
     {
-        if (_isFull || _convertedCoal >= _maxCoal)
+        if (_coal.Count < 1 ||_convertedCoal >= _maxCoal)
+        {
+            StartCoroutine(WaitForCoal());
             return;
+        }
 
         _convertedCoal++;
         // do burning vfx
 
-        if (_convertedCoal == _maxCoal)
-            _isFull = true;
-        else
-            Invoke(nameof(ConvertCoal), _productionTime);
+        Invoke(nameof(ConvertCoal), _productionTime);
+    }
+    private IEnumerator WaitForCoal()
+    {
+        yield return new WaitUntil(()=> _coal.Count > 0);
+        ConvertCoal();
     }
 }
