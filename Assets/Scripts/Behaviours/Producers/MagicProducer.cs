@@ -9,7 +9,7 @@ public class MagicProducer : Producer
     public override ResourceObjectPool ResourcePool { get => _resourcePool; set => _resourcePool = value; }
 
     [Header("Production Details")]
-    [SerializeField] private ProducerType _type;
+    [SerializeField] private ProducerType _type = ProducerType.MagicFountain;
     public override ProducerType Type => _type;
 
     [SerializeField] private int _maxProducts = 3;

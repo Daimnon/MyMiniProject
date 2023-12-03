@@ -62,6 +62,10 @@ public class FuelStove : MonoBehaviour
     private void TakeCoal()
     {
         Resource coal = _playerInventory.PayResource(ResourceType.Coal);
+
+        if (!coal)
+            return;
+
         _coal.Add(coal);
         _resourceObjectPool.ReturnResourceToPool(coal);
     }

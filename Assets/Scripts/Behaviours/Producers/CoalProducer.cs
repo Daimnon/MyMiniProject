@@ -1,25 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
-public class IronProducer : Producer
+public class CoalProducer : Producer
 {
     [Header("Product Source")]
     [SerializeField] private ResourceObjectPool _resourcePool;
     public override ResourceObjectPool ResourcePool { get => _resourcePool; set => _resourcePool = value; }
 
-    [SerializeField] private FuelStove _engine;
-    public FuelStove Engine => _engine;
-
     [Header("Production Details")]
-    [SerializeField] private ProducerType _type = ProducerType.Forge;
+    [SerializeField] private ProducerType _type = ProducerType.CoalMine;
     public override ProducerType Type => _type;
 
     [SerializeField] private int _maxProducts = 3;
     public override int MaxProducts { get => _maxProducts; set => _maxProducts = value; }
 
-    [SerializeField] private float _productionTime = 1.0f;
+    [SerializeField] private float _productionTime = 4.5f;
     public override float ProductionTime => _productionTime;
 
     [SerializeField] private bool _isFull = false;
@@ -32,17 +28,26 @@ public class IronProducer : Producer
     private List<Resource> _products;
     public override List<Resource> Products => _products;
 
+    [Header("Animations")]
+    [SerializeField] private Animation _pickaxeAnim;
+    [SerializeField] private float _hitTime = 2.25f;
+
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
+    private WaitForSeconds _waitForProductionTime, _timeToHit, _timeToPrepare;
+    private bool _isProducing = false;
 
     private void Awake()
     {
         _products = new List<Resource>();
+
+        _waitForProductionTime = new(_productionTime);
+        _timeToHit = new(_hitTime);
+        _timeToPrepare = new(_productionTime - _hitTime);
     }
     private void Start()
     {
         Initialize();
-        Produce();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,10 +60,14 @@ public class IronProducer : Producer
         if (!_playerInventory)
             return;
 
-        if (_products.Count > 0)
-            GiveIron();
-        else
-            Debug.Log("Gave all iron!");
+        if (!_isProducing && _products.Count < _maxProducts)
+        {
+            _isProducing = true;
+            StartCoroutine(ProductionSequence());
+            return;
+        }
+
+        Debug.Log("Producing or Maxed");
     }
     private void OnTriggerExit(Collider other)
     {
@@ -66,20 +75,10 @@ public class IronProducer : Producer
             _playerInventory = null;
     }
 
-    public override void Produce() // need to modify for fuel usage
+    public override void Produce()
     {
-        int convertedCoal = _engine.ConvertedCoal;
-
         if (_isFull)
-        {
-            StartCoroutine(WaitForProductionSpace());
             return;
-        }
-        else if (convertedCoal < 1)
-        {
-            StartCoroutine(WaitForProduction());
-            return;
-        }
 
         int productCount = _products.Count;
         if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
@@ -87,33 +86,21 @@ public class IronProducer : Producer
             int resourceIndex = (int)_type;
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
             newResource.transform.position = _productsTr[productCount].position;
-            _engine.UseConvertedCoal();
             _products.Add(newResource);
 
             if (productCount == _maxProducts)
                 _isFull = true;
         }
-
-        Invoke(nameof(Produce), _productionTime);
     }
 
-    private IEnumerator WaitForProduction()
+    private IEnumerator ProductionSequence()
     {
-        yield return new WaitUntil(() => _engine.ConvertedCoal > 0);
+        _pickaxeAnim.Play();
+        yield return _timeToHit;
+
         Produce();
-    }
-    private IEnumerator WaitForProductionSpace()
-    {
-        yield return new WaitUntil(() => _engine.ConvertedCoal < _maxProducts);
-        StartCoroutine(WaitForProduction());
-    }
+        yield return _timeToPrepare;
 
-    private void GiveIron()
-    {
-        if (_products.Count > 0)
-        {
-            _playerInventory.TakeResource(_products[0]);
-            _products.RemoveAt(0);
-        }
+        _isProducing = false;
     }
 }
