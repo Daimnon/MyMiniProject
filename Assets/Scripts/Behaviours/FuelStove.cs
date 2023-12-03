@@ -11,22 +11,19 @@ public class FuelStove : MonoBehaviour
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
 
-    [Header("Coal")]
-    [SerializeField] private int _maxCoal = 3;
-    public int MaxCoal { get => _maxCoal; set => _maxCoal = value; }
-
-    [SerializeField] private bool _isFull = false;
-    public bool IsFull { get => _isFull; set => _isFull = value; }
-
-    private List<Resource> _coal;
-    public List<Resource> Coal => _coal;
-
     [Header("Converted Coal")]
     [SerializeField] private int _convertedCoal = 0;
     public int ConvertedCoal => _convertedCoal;
 
     [SerializeField] private float _productionTime = 0.5f;
     public float ProductionTime => _productionTime;
+
+    [Header("Coal")]
+    [SerializeField] private int _maxCoal = 3;
+    public int MaxCoal { get => _maxCoal; set => _maxCoal = value; }
+
+    private List<Resource> _coal;
+    public List<Resource> Coal => _coal;
 
     private void Awake()
     {
