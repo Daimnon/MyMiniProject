@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
         ETouch.Touch.onFingerDown += OnFingerDown;
         ETouch.Touch.onFingerUp += OnFingerUp;
         ETouch.Touch.onFingerMove += OnFingerMove;
+        EventManager.OnHoldResource += OnHoldResource;
     }
     private void Update()
     {
@@ -106,5 +107,10 @@ public class PlayerController : MonoBehaviour
             stickPos.y = screenHeightMinusHalfHeight;
 
         return stickPos;
+    }
+
+    private void OnHoldResource(bool isHoldingResource)
+    {
+        _playerAnimator.SetBool("Is Holding", isHoldingResource);
     }
 }

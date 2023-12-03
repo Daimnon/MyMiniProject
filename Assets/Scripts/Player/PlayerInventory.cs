@@ -30,6 +30,12 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private RectTransform _canvasRTr;
     [SerializeField] private TextMeshProUGUI _currencyTxt, _resourceTxt;
 
+    private void Start()
+    {
+        bool isHoldingResource = _resources.Count > 0 ? true : false;
+        EventManager.InvokeHoldResource(isHoldingResource);
+    }
+
     public void EarnCurrency(int addedCurrency)
     {
         _currency += addedCurrency;
@@ -59,6 +65,9 @@ public class PlayerInventory : MonoBehaviour
         _resources.Add(newResource);
         _resourceCount++;
 
+        if (_resourceCount == 1)
+            EventManager.InvokeHoldResource(true);
+
         int lastResourceIndex = _resourceCount - 1;
         newResource.transform.position = _resourcesTr[lastResourceIndex].position;
         newResource.transform.SetParent(_resourcesTr[lastResourceIndex]);
@@ -83,6 +92,10 @@ public class PlayerInventory : MonoBehaviour
         _resourceObjectPool.ReturnResourceToPool(resourceToPay);
         _resources.Remove(resourceToPay);
         _resourceCount--;
+
+        if (_resourceCount == 0)
+            EventManager.InvokeHoldResource(false);
+
         _canvasRTr.gameObject.SetActive(false);
         return resourceToPay;
     }

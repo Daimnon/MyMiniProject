@@ -6,6 +6,7 @@ using UnityEngine;
 public static class EventManager
 {
     public static Action OnGameLaunched, OnLevelLaunched, OnOpenMenu;
+    public static Action<bool> OnHoldResource;
     public static Action<int> OnEarnCurrency;
     public static Action<int> OnPayCurrency;
     public static Action<Resource> OnTakeResource, OnPayFirstResource, OnPayResource;
@@ -24,6 +25,12 @@ public static class EventManager
     {
         OnOpenMenu?.Invoke();
         UnityEngine.Debug.Log("Event: OpenMenu");
+    }
+
+    public static void InvokeHoldResource(bool isHoldingResource)
+    {
+        OnHoldResource?.Invoke(isHoldingResource);
+        UnityEngine.Debug.Log("Event: HoldResource changed");
     }
 
     public static void InvokeEarnCurrency(int amount)
