@@ -6,7 +6,6 @@ using UnityEngine;
 public class FuelStove : MonoBehaviour
 {
     [SerializeField] private ResourceObjectPool _resourceObjectPool;
-    [SerializeField] private IronProducer _forge;
 
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
