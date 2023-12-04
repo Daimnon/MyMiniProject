@@ -28,7 +28,6 @@ public class MagicProducer : Producer
 
     [Header("Animation")]
     [SerializeField] private Transform _dropOrigin;
-    [SerializeField] private float _fallTime = 0.5f;
 
     private List<Resource> _products;
     public override List<Resource> Products => _products;
