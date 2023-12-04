@@ -29,19 +29,18 @@ public class CoalProducer : Producer
     public override List<Resource> Products => _products;
 
     [Header("Animations")]
-    [SerializeField] private Animation _pickaxeAnim;
+    [SerializeField] private Animator _pickaxeAnimator;
     [SerializeField] private float _hitTime = 2.25f;
 
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
-    private WaitForSeconds _waitForProductionTime, _timeToHit, _timeToPrepare;
+    private WaitForSeconds _timeToHit, _timeToPrepare;
     private bool _isProducing = false;
 
     private void Awake()
     {
         _products = new List<Resource>();
 
-        _waitForProductionTime = new(_productionTime);
         _timeToHit = new(_hitTime);
         _timeToPrepare = new(_productionTime - _hitTime);
     }
@@ -95,12 +94,13 @@ public class CoalProducer : Producer
 
     private IEnumerator ProductionSequence()
     {
-        _pickaxeAnim.Play();
+        _pickaxeAnimator.SetTrigger("Trigger Animation");
         yield return _timeToHit;
 
         Produce();
         yield return _timeToPrepare;
 
+        _pickaxeAnimator.ResetTrigger("Trigger Animation");
         _isProducing = false;
     }
 }

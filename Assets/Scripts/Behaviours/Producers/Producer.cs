@@ -18,10 +18,8 @@ public abstract class Producer : MonoBehaviour
         if (!ResourcePool && GameManager.Instance.ResourcePool)
             ResourcePool = GameManager.Instance.ResourcePool;
     }
-    private void GiveProduct(PlayerInventory inventory)
+    public void Upgrade(int amount)
     {
-        Resource lastResource = Products[^1];
-        inventory.TakeResource(lastResource);
-        Products.Remove(lastResource);
+        MaxProducts += amount;
     }
 }

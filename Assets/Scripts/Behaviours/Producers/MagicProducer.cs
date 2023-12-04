@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MagicProducer : Producer
@@ -25,6 +26,10 @@ public class MagicProducer : Producer
     [SerializeField] private Transform[] _productsTr;
     public override Transform[] ProductsTr => _productsTr;
 
+    [Header("Animation")]
+    [SerializeField] private Transform _dropOrigin;
+    [SerializeField] private float _fallTime = 0.5f;
+
     private List<Resource> _products;
     public override List<Resource> Products => _products;
 
@@ -44,11 +49,14 @@ public class MagicProducer : Producer
             return;
 
         int productCount = _products.Count;
+        Transform productTr = null;
+
         if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
         {
             int resourceIndex = (int)_type;
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
-            newResource.transform.position = _productsTr[productCount].position;
+            productTr = newResource.transform;
+            productTr.position = _productsTr[productCount].position;
             _products.Add(newResource);
 
             if (productCount == _maxProducts)
@@ -56,6 +64,28 @@ public class MagicProducer : Producer
         }
 
         if (!_isFull)
+        {
             Invoke(nameof(Produce), _productionTime);
+
+            if (productTr)
+                StartCoroutine(DropMagic(productTr, _productsTr[productCount]));
+        }
+    }
+
+    private IEnumerator DropMagic(Transform newProductTr, Transform productTr)
+    {
+        float elapsedTime = 0f;
+        Vector3 originalScale = newProductTr.localScale;
+
+        while (elapsedTime < _productionTime)
+        {
+            newProductTr.localScale = Vector3.Lerp(Vector3.zero, originalScale, elapsedTime / _productionTime);
+            newProductTr.position = Vector3.Lerp(_dropOrigin.position, productTr.position, elapsedTime / _productionTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        newProductTr.localScale = originalScale;
+        newProductTr.position = productTr.position;
     }
 }
