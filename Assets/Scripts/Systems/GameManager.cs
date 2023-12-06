@@ -10,14 +10,31 @@ public enum ResourceType
     Magic,
     Leather
 }
-
-public enum ProducerType
+public enum ResourceProducerType
 {
     MushroomCluster,
     CoalMine,
     Forge,
     MagicFountain,
     Dragon
+}
+public enum WeaponType
+{
+    Axe, 
+    Sword, 
+    Special
+}
+public enum WeaponRarity
+{
+    Common,
+    Enchanted,
+    Legendary
+}
+public enum WeaponSize
+{
+    Small,
+    Medium,
+    Large
 }
 
 public class GameManager : MonoBehaviour
@@ -30,6 +47,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private ResourceObjectPool _resourcePool;
     public ResourceObjectPool ResourcePool => _resourcePool;
+
+    [SerializeField] private WeaponObjectPool _weaponPool;
+    public WeaponObjectPool WeaponPool => _weaponPool;
 
     private void Awake()
     {
