@@ -4,18 +4,19 @@ using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [Header("Data")]
+    [Header("Currency Data")]
+    [SerializeField] private CurrencyObjectPool _currencyObjectPool;
+    public CurrencyObjectPool CurrencyObjectPool => _currencyObjectPool;
+
     [SerializeField] private int _currency = 0;
     public int Currency => _currency;
 
-    [SerializeField] private int _carryLimit = 3;
-    public int CarryLimit => _carryLimit;
+    [Header("Resources Data")]
+    [SerializeField] private int _resourcesCarryLimit = 3;
+    public int ResourcesCarryLimit => _resourcesCarryLimit;
 
     [SerializeField] private List<Transform> _resourcesTr;
     public List<Transform> ResourcesTr => _resourcesTr;
-
-    [SerializeField] private CurrencyObjectPool _currencyObjectPool;
-    public CurrencyObjectPool CurrencyObjectPool => _currencyObjectPool;
 
     [SerializeField] private ResourceObjectPool _resourceObjectPool;
     public ResourceObjectPool ResourceObjectPool => _resourceObjectPool;
@@ -25,6 +26,19 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private int _resourceCount = 0; // testing requires serialization
     public int ResourceCount => _resourceCount;
+
+    [Header("Weapon Data")]
+    [SerializeField] private int _weaponCarryLimit = 1;
+    public int WeaponCarryLimit => _weaponCarryLimit;
+
+    [SerializeField] private Transform[] _weaponsTr;
+    public Transform[] WeaponsTr => _weaponsTr;
+
+    [SerializeField] private WeaponObjectPool _weaponObjectPool;
+    public WeaponObjectPool WeaponObjectPool => _weaponObjectPool;
+
+    private List<Weapon> _weapon = new List<Weapon>(1) { null };
+    public List<Weapon> Weapon => _weapon;
 
     [Header("UI")]
     [SerializeField] private RectTransform _canvasRTr;
@@ -56,7 +70,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void TakeResource(Resource newResource)
     {
-        if (_resources.Count >= _carryLimit)
+        if (_resources.Count >= _resourcesCarryLimit)
         {
             Debug.Log("Carry limit reached");
             return;
@@ -69,12 +83,13 @@ public class PlayerInventory : MonoBehaviour
             EventManager.InvokeHoldResource(true);
 
         int lastResourceIndex = _resourceCount - 1;
-        newResource.transform.position = _resourcesTr[lastResourceIndex].position;
         newResource.transform.SetParent(_resourcesTr[lastResourceIndex]);
+        newResource.transform.localPosition = Vector3.zero;
+        newResource.transform.localRotation = Quaternion.identity;
 
-        if (_resources.Count == _carryLimit)
+        if (_resources.Count == _resourcesCarryLimit)
         {
-            string maxItemCountTxt = _carryLimit.ToString();
+            string maxItemCountTxt = _resourcesCarryLimit.ToString();
             _resourceTxt.text = maxItemCountTxt + "/" + maxItemCountTxt;
             _canvasRTr.anchoredPosition = new Vector2(0, _resources[lastResourceIndex].transform.position.y);
             _canvasRTr.gameObject.SetActive(true);
@@ -128,5 +143,32 @@ public class PlayerInventory : MonoBehaviour
         _canvasRTr.gameObject.SetActive(false);
 
         return resourceToGive;
+    }
+    public void TakeWeapon(Weapon newWeapon)
+    {
+        if (_weapon.Count < 1)
+            return;
+
+        _weapon.Add(newWeapon);
+        EventManager.InvokeHoldWeapon(true);
+
+        int weaponTrIndex = (int)newWeapon.Size;
+        newWeapon.transform.SetParent(_weaponsTr[weaponTrIndex]);
+        newWeapon.transform.localPosition = Vector3.zero;
+        newWeapon.transform.localRotation = Quaternion.identity;
+    }
+    public Weapon GiveWeapon(WeaponType type, WeaponRarity rarity, WeaponSize size)
+    {
+        Weapon currentWeapon = _weapon[0];
+        if (!currentWeapon || currentWeapon.Type != type || currentWeapon.Rarity != rarity|| currentWeapon.Size != size)
+        {
+            Debug.Log("No resource to give");
+            return null;
+        }
+
+        _weapon.Remove(currentWeapon);
+        //_canvasRTr.gameObject.SetActive(false);
+
+        return currentWeapon;
     }
 }

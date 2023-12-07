@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MagicProducer : Producer
+public class MagicProducer : ResourceProducer
 {
     [Header("Product Source")]
     [SerializeField] private ResourceObjectPool _resourcePool;
     public override ResourceObjectPool ResourcePool { get => _resourcePool; set => _resourcePool = value; }
 
     [Header("Production Details")]
-    [SerializeField] private ProducerType _type = ProducerType.MagicFountain;
-    public override ProducerType Type => _type;
+    [SerializeField] private ResourceProducerType _type = ResourceProducerType.MagicFountain;
+    public override ResourceProducerType Type => _type;
+
+    [SerializeField] private int _upgradeFactor = 3;
+    public override int UpgradeFactor { get => _upgradeFactor; }
 
     [SerializeField] private int _maxProducts = 3;
     public override int MaxProducts { get => _maxProducts; set => _maxProducts = value; }
