@@ -55,7 +55,9 @@ public class MagicProducer : Producer
             int resourceIndex = (int)_type;
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
             productTr = newResource.transform;
-            productTr.position = _productsTr[productCount].position;
+            productTr.parent = _productsTr[productCount];
+            productTr.localPosition = Vector3.zero;
+            productTr.localRotation = Quaternion.identity;
             _products.Add(newResource);
 
             if (productCount == _maxProducts)
