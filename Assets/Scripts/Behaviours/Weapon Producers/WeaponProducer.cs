@@ -13,8 +13,12 @@ public abstract class WeaponProducer : MonoBehaviour
     public abstract float ProductionTime { get; }
     public abstract bool IsBusy { get; set; }
     public abstract bool IsFull { get; set; }
-    public abstract Transform[] ProductsTr { get; }
-    public abstract List<Weapon> Products { get; }
+    public abstract Transform[] SmallProductsTr { get; }
+    public abstract Transform[] MediumProductsTr { get; }
+    public abstract Transform[] LargeProductsTr { get; }
+    public abstract List<Weapon> SmallProducts { get; }
+    public abstract List<Weapon> MediumProducts { get; }
+    public abstract List<Weapon> LargeProducts { get; }
 
     public abstract void Produce();
     protected void Initialize()
@@ -26,12 +30,12 @@ public abstract class WeaponProducer : MonoBehaviour
     {
         MaxProducts += CapacityUpgradeFactor;
     }
-    public virtual void Upgrade(WeaponSize weaponSize)
+    public virtual void Upgrade(WeaponSize weaponSizeRank)
     {
-        if ((int)weaponSize >= System.Enum.GetValues(typeof(WeaponRarity)).Length - 1)
+        if ((int)weaponSizeRank >= System.Enum.GetValues(typeof(WeaponRarity)).Length - 1)
             return;
 
-        int currentRank = (int)weaponSize;
-        weaponSize = (WeaponSize)currentRank+1;
+        int currentRank = (int)weaponSizeRank;
+        weaponSizeRank = (WeaponSize)currentRank+1;
     }
 }

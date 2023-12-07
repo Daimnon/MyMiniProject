@@ -83,8 +83,9 @@ public class PlayerInventory : MonoBehaviour
             EventManager.InvokeHoldResource(true);
 
         int lastResourceIndex = _resourceCount - 1;
-        newResource.transform.position = _resourcesTr[lastResourceIndex].position;
         newResource.transform.SetParent(_resourcesTr[lastResourceIndex]);
+        newResource.transform.localPosition = Vector3.zero;
+        newResource.transform.localRotation = Quaternion.identity;
 
         if (_resources.Count == _resourcesCarryLimit)
         {

@@ -9,9 +9,14 @@ public class WeaponObjectPool : MonoBehaviour
 
     private List<Weapon> _weaponPool;
 
+    private int _uniqueWeaponsCount = 0;
+    public int UniqueWeaponsCount => _uniqueWeaponsCount;
+
+
     private void Awake()
     {
         _weaponPool = new List<Weapon>();
+        _uniqueWeaponsCount = _weaponPrefabs.Length;
     }
     private void OnEnable()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class AxeProducer : WeaponProducer
@@ -7,9 +8,6 @@ public class AxeProducer : WeaponProducer
     [Header("Product Source")]
     [SerializeField] private WeaponObjectPool _weaponPool;
     public override WeaponObjectPool WeaponPool { get => _weaponPool; set => _weaponPool = value; }
-
-    /*[SerializeField] private FuelStove _engine;
-    public FuelStove Engine => _engine;*/
 
     [Header("Production Details")]
     [SerializeField] private WeaponType _weaponType = WeaponType.Axe;
@@ -36,24 +34,44 @@ public class AxeProducer : WeaponProducer
     [SerializeField] private bool _isFull = false;
     public override bool IsFull { get => _isFull; set => _isFull = value; }
 
-    [Header("Product Placements")]
-    [SerializeField] private Transform[] _productsTr;
-    public override Transform[] ProductsTr => _productsTr;
+    [SerializeField] private int[] _requiredIron;
+    [SerializeField] private int _currentIronCount = 0;
 
-    private List<Weapon> _products;
-    public override List<Weapon> Products => _products;
+    [Header("Product Placements")]
+    [SerializeField] private Transform[] _smallProductsTr;
+    public override Transform[] SmallProductsTr => _smallProductsTr;
+
+    [SerializeField] private Transform[] _mediumProductsTr;
+    public override Transform[] MediumProductsTr => _mediumProductsTr;
+
+    [SerializeField] private Transform[] _largeProductsTr;
+    public override Transform[] LargeProductsTr => _largeProductsTr;
+
+    private List<Weapon> _smallProducts;
+    public override List<Weapon> SmallProducts => _smallProducts;
+
+    private List<Weapon> _mediumProducts;
+    public override List<Weapon> MediumProducts => _mediumProducts;
+
+    private List<Weapon> _largeProducts;
+    public override List<Weapon> LargeProducts => _largeProducts;
+
 
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
 
     private void Awake()
     {
-        _products = new List<Weapon>();
+        _smallProducts = new List<Weapon>();
+        _mediumProducts = new List<Weapon>();
+        _largeProducts = new List<Weapon>();
     }
     private void Start()
     {
         Initialize();
-        Produce();
+
+        if (_requiredIron == null)
+            _requiredIron = new int[_weaponPool.UniqueWeaponsCount];
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,7 +83,6 @@ public class AxeProducer : WeaponProducer
             if (_isBusy)
                 return;
 
-            _playerInventory.PayResource(ResourceType.Iron);
             StartCoroutine(ProduceWeapon());
         }
     }
@@ -74,7 +91,6 @@ public class AxeProducer : WeaponProducer
         if (!_playerInventory || _isBusy)
             return;
 
-        _playerInventory.PayResource(ResourceType.Iron);
         StartCoroutine(ProduceWeapon());
     }
     private void OnTriggerExit(Collider other)
@@ -85,12 +101,36 @@ public class AxeProducer : WeaponProducer
 
     public override void Produce() // need to modify for fuel usage
     {
-        int productCount = _products.Count;
-        if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
+        List<Weapon> currentProducts = null;
+        Transform[] productsTr = null;
+        switch (_weaponSize)
         {
-            Weapon newResource = _weaponPool.GetWeaponFromPool(_weaponType, _weaponRarity, _weaponSize);
-            newResource.transform.position = _productsTr[productCount].position;
-            _products.Add(newResource);
+            case WeaponSize.Small:
+                currentProducts = _smallProducts;
+                productsTr = _smallProductsTr;
+                break;
+            case WeaponSize.Medium:
+                currentProducts = _mediumProducts;
+                productsTr = _mediumProductsTr;
+                break;
+            case WeaponSize.Large:
+                currentProducts = _largeProducts;
+                productsTr = _largeProductsTr;
+                break;
+            default:
+                currentProducts = _smallProducts;
+                productsTr = _smallProductsTr;
+                break;
+        }
+
+        int productCount = _smallProducts.Count + _mediumProducts.Count + _largeProducts.Count;
+        if (productCount < _maxProducts && productsTr[productCount].childCount < 1)
+        {
+            Weapon newWeapon = _weaponPool.GetWeaponFromPool(_weaponType, _weaponRarity, _weaponSize);
+            newWeapon.transform.parent = productsTr[productCount];
+            newWeapon.transform.localPosition = Vector3.zero;
+            newWeapon.transform.localRotation = Quaternion.identity;
+            currentProducts.Add(newWeapon);
             _isBusy = false;
 
             if (productCount == _maxProducts)
@@ -100,9 +140,25 @@ public class AxeProducer : WeaponProducer
 
     private IEnumerator ProduceWeapon()
     {
-        _isBusy = true;
+        int sizeRank = (int)_weaponSize;
+        ResourceType iron = ResourceType.Iron;
+        int price = _requiredIron[sizeRank];
 
+        for (int i = 0; i < price; i++)
+        {
+            if (!_playerInventory.PayResource(iron))
+                yield break;
+
+            _currentIronCount++;
+
+            if (_currentIronCount < price)
+                yield break;
+        }
+        
+        _isBusy = true;
         yield return new WaitForSeconds(_productionTime);
+
         Produce();
+        _currentIronCount -= price;
     }
 }

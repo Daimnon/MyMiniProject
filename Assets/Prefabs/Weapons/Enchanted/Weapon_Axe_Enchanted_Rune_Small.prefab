@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2542603678280592161}
   - component: {fileID: 5287591283271644223}
   - component: {fileID: 6279769385896139941}
+  - component: {fileID: -5774475276462800055}
   m_Layer: 0
   m_Name: Weapon_Axe_Enchanted_Rune_Small
   m_TagString: Untagged
@@ -105,3 +106,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.07017009, y: 0.8055665, z: 0.31635922}
   m_Center: {x: -0.000000007450581, y: 0.10035917, z: 0.054438304}
+--- !u!114 &-5774475276462800055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4645244003510630854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984d1d05fd25b7f48a2d00a73b673cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  _rarity: 1
+  _size: 0
+  _renderer: {fileID: 5287591283271644223}
+  _isInInventory: 0

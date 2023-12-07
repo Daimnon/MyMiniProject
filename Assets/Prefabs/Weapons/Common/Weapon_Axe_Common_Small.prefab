@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4417255732358633593}
   - component: {fileID: 5427668273695313191}
   - component: {fileID: 6857054538975841301}
+  - component: {fileID: 5515825817660913131}
   m_Layer: 0
   m_Name: Weapon_Axe_Common_Small
   m_TagString: Untagged
@@ -105,3 +106,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.083081484, y: 0.7049984, z: 0.25407314}
   m_Center: {x: -0.00000011920929, y: 0.13992089, z: 0.051383983}
+--- !u!114 &5515825817660913131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4151364652799812500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984d1d05fd25b7f48a2d00a73b673cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  _rarity: 0
+  _size: 0
+  _renderer: {fileID: 5427668273695313191}
+  _isInInventory: 0
