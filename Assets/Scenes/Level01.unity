@@ -615,6 +615,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1286509, y: 0.37105155, z: 0.1290807}
   m_Center: {x: 0.000023245811, y: 0.18508512, z: -0.000014834106}
+--- !u!23 &580319690 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2310330, guid: 973e05b9f0f54c340a1c4591b29e5f39,
+    type: 3}
+  m_PrefabInstance: {fileID: 580319686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &586264494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1138,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1286509, y: 0.37105155, z: 0.1290807}
   m_Center: {x: 0.000023245811, y: 0.18508512, z: -0.000014834106}
+--- !u!23 &1022760266 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2310330, guid: 973e05b9f0f54c340a1c4591b29e5f39,
+    type: 3}
+  m_PrefabInstance: {fileID: 1022760262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1034737609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3285995787341987424, guid: 55749d9636118994794f555f1a5fbfb3,
@@ -1455,6 +1467,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1286509, y: 0.37105155, z: 0.1290807}
   m_Center: {x: 0.000023245811, y: 0.18508512, z: -0.000014834106}
+--- !u!23 &1510962601 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2310330, guid: 973e05b9f0f54c340a1c4591b29e5f39,
+    type: 3}
+  m_PrefabInstance: {fileID: 1510962597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1513161362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1336682113178595924, guid: 43cfd56858ba61d4ebfc1c0923a6f5bd,
@@ -2180,6 +2198,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2065189862}
+  - component: {fileID: 2065189864}
+  - component: {fileID: 2065189863}
   m_Layer: 7
   m_Name: Alchemy_Table
   m_TagString: Untagged
@@ -2213,6 +2233,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: -15, z: 0}
+--- !u!114 &2065189863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065189861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1b90ca978aa774898fc2e6acc320e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mushroomClaster: {fileID: 2065189864}
+  _potionRenderes:
+  - {fileID: 1022760266}
+  - {fileID: 1510962601}
+  - {fileID: 580319690}
+  _clearMat: {fileID: 2100000, guid: 0574116a7188c654ab34fcd54a2d0ecc, type: 2}
+  _completeMat: {fileID: 2100000, guid: 42b64fdb315e3054ea757d8d1c4bcfa7, type: 2}
+  _potionCount: 3
+  _clearPotions: 3
+  _completePotions: 0
+  _isFull: 0
+--- !u!114 &2065189864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065189861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13ab729d5b55984f8f2bcd31679632a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourcePool: {fileID: 5122770068513668028}
+  _type: 0
+  _upgradeFactor: 3
+  _maxProducts: 3
+  _productionTime: 0.1
+  _isFull: 0
+  _productsTr: []
 --- !u!4 &2102092221 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3366513897757991253, guid: 55749d9636118994794f555f1a5fbfb3,
