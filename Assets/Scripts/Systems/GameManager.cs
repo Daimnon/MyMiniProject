@@ -13,6 +13,7 @@ public enum ResourceType
 public enum ResourceProducerType
 {
     MushroomCluster,
+    AlchemyTable,
     CoalMine,
     Forge,
     MagicFountain,

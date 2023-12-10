@@ -321,7 +321,7 @@ Transform:
   - {fileID: 6168501149337419230}
   - {fileID: 3614947929217220769}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &5462367335997840415
 CapsuleCollider:
@@ -371,7 +371,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!195 &6651857333720101100
 NavMeshAgent:
@@ -407,9 +407,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d46fa5b9889c5e408227276ccd947f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerAnimator: {fileID: 1690260210798311984}
   _stick: {fileID: 0}
   _stickSize: {x: 300, y: 300}
   _screenOffsetMargin: {x: 100, y: 50}
+  _idleGestureTime: 7.5
   _agent: {fileID: 6651857333720101100}
 --- !u!114 &7385138235115690348
 MonoBehaviour:
@@ -423,8 +425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad1a49548b718f4080d162e4fa0a533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currencyObjectPool: {fileID: 0}
   _currency: 0
-  _carryLimit: 3
+  _resourcesCarryLimit: 3
   _resourcesTr:
   - {fileID: 1365360851998474490}
   - {fileID: 5985781776099340552}
@@ -438,10 +441,12 @@ MonoBehaviour:
   - {fileID: 6389916883913427100}
   - {fileID: 4148002800108846814}
   - {fileID: 7028850009539997606}
-  _currencyObjectPool: {fileID: 0}
   _resourceObjectPool: {fileID: 0}
   _resources: []
   _resourceCount: 0
+  _weaponCarryLimit: 1
+  _weaponsTr: []
+  _weaponObjectPool: {fileID: 0}
   _canvasRTr: {fileID: 6168501149337419230}
   _currencyTxt: {fileID: 0}
   _resourceTxt: {fileID: 3161843829394331796}
@@ -904,9 +909,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8592876449707639036, guid: 6b5d591dbb72ac04a80d42bbb710cb7a,
         type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ae5c843dc605dc44b452ab72b95724e, type: 2}
+    - target: {fileID: 8592876449707639036, guid: 6b5d591dbb72ac04a80d42bbb710cb7a,
+        type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
+    - target: {fileID: 8592876449711865404, guid: 6b5d591dbb72ac04a80d42bbb710cb7a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 24d70ee334f39ec4e82417fbaa9d45e3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -946,3 +961,9 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!95 &1690260210798311984 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8592876449711865404, guid: 6b5d591dbb72ac04a80d42bbb710cb7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6932452897833157644}
+  m_PrefabAsset: {fileID: 0}

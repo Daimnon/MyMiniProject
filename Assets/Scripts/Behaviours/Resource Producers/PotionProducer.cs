@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PotionProducer : Producer
+public class PotionProducer : ResourceProducer
 {
     [Header("Product Source")]
     [SerializeField] private ResourceObjectPool _resourcePool;
@@ -12,8 +12,11 @@ public class PotionProducer : Producer
     public MushroomProducer MushroomCluster => _mushroomCluster;
 
     [Header("Production Details")]
-    [SerializeField] private ProducerType _type = ProducerType.Forge;
-    public override ProducerType Type => _type;
+    [SerializeField] private ResourceProducerType _type = ResourceProducerType.AlchemyTable;
+    public override ResourceProducerType Type => _type;
+
+    [SerializeField] private int _upgradeFactor = 3;
+    public override int UpgradeFactor { get => _upgradeFactor; }
 
     [SerializeField] private int _maxProducts = 3;
     public override int MaxProducts { get => _maxProducts; set => _maxProducts = value; }
@@ -69,7 +72,7 @@ public class PotionProducer : Producer
     {
         int availableMushrooms = _mushroomCluster.Products.Count;
 
-        if (_isFull)
+        /*if (_isFull)
         {
             StartCoroutine(WaitForProductionSpace());
             return;
@@ -78,7 +81,7 @@ public class PotionProducer : Producer
         {
             StartCoroutine(WaitForProduction());
             return;
-        }
+        }*/
 
         int productCount = _products.Count;
         if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
@@ -86,7 +89,7 @@ public class PotionProducer : Producer
             int resourceIndex = (int)_type;
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
             newResource.transform.position = _productsTr[productCount].position;
-            _mushroomCluster.Complete();
+            //_mushroomCluster.Complete();
             _products.Add(newResource);
 
             if (productCount == _maxProducts)
@@ -96,7 +99,7 @@ public class PotionProducer : Producer
         Invoke(nameof(Produce), _productionTime);
     }
 
-    private IEnumerator WaitForProduction()
+    /*private IEnumerator WaitForProduction()
     {
         yield return new WaitUntil(() => _engine.ConvertedCoal > 0);
         Produce();
@@ -105,7 +108,7 @@ public class PotionProducer : Producer
     {
         yield return new WaitUntil(() => _engine.ConvertedCoal < _maxProducts);
         StartCoroutine(WaitForProduction());
-    }
+    }*/
 
     private void GiveIron()
     {
