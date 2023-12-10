@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2475534154842481415}
   - component: {fileID: 2412351126227767241}
   - component: {fileID: 3722104407279718134}
+  - component: {fileID: 1391153667481484140}
   m_Layer: 0
   m_Name: Coal
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7367344331362962828
 MeshFilter:
@@ -100,11 +101,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2204895, y: 0.2197895, z: 0.24116898}
+  m_Size: {x: 0.440979, y: 0.439579, z: 0.482338}
   m_Center: {x: -0.0019989014, y: 0.0074415207, z: 0.0005931854}
 --- !u!114 &3722104407279718134
 MonoBehaviour:
@@ -118,5 +119,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a955df4cc3c96ef4ca81bef3fcd2dbc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 1
+  _type: 2
   _renderer: {fileID: 2475534154842481415}
+  _isInInventory: 0
+--- !u!114 &1391153667481484140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109896369486576798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 1.51
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

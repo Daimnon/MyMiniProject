@@ -8,96 +8,34 @@ public class MushroomToPotionConverter : MonoBehaviour
     [SerializeField] private MushroomProducer _mushroomClaster;
     [SerializeField] private MeshRenderer[] _potionRenderes;
     [SerializeField] private Material _clearMat, _completeMat;
+    [SerializeField] private float _brewTime = 3.0f;
     [SerializeField] private int _potionCount = 3, _clearPotions = 3, _completePotions = 0;
 
     [SerializeField] private bool _isFull = false;
     public  bool IsFull { get => _isFull; set => _isFull = value; }
 
-    private ResourceObjectPool _resourceObjectPool;
-    private PlayerInventory _playerInventory;
+    private WaitForSeconds _waitForBrew = null;
+    private IEnumerator _makePotions = null;
     private const string _playerTag = "Player";
+    private bool _isMakingPotions = false;
 
     private void Awake()
     {
         _clearMat = new(_clearMat);
         _completeMat = new(_completeMat);
-    }
-    private void Start()
-    {
-        _resourceObjectPool = GameManager.Instance.ResourcePool;
+        _waitForBrew = new WaitForSeconds(_brewTime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(_playerTag))
-            _playerInventory = other.GetComponent<PlayerInventory>();
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (!_playerInventory)
-            return;
-
-        if (_mushroomClaster.Products.Count > 0)
-            CompletePotion();
-        else
-            Debug.Log("Gave all iron!");
+            StartMakingPotions();
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_playerTag))
-            _playerInventory = null;
+            StopMakingPotions();
     }
-
-    /*public void CompletePotion() // need to modify for fuel usage
-    {
-        int convertedCoal = _engine.ConvertedCoal;
-
-        if (_isFull)
-        {
-            StartCoroutine(WaitForProductionSpace());
-            return;
-        }
-        else if (convertedCoal < 1)
-        {
-            StartCoroutine(WaitForProduction());
-            return;
-        }
-
-        int productCount = _products.Count;
-        if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
-        {
-            int resourceIndex = (int)_type;
-            Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
-            newResource.transform.position = _productsTr[productCount].position;
-            _engine.UseConvertedCoal();
-            _products.Add(newResource);
-
-            if (productCount == _maxProducts)
-                _isFull = true;
-        }
-
-        Invoke(nameof(Produce), _productionTime);
-    }
-
-    private IEnumerator WaitForProduction()
-    {
-        yield return new WaitUntil(() => _engine.ConvertedCoal > 0);
-        Produce();
-    }
-    private IEnumerator WaitForProductionSpace()
-    {
-        yield return new WaitUntil(() => _engine.ConvertedCoal < _maxProducts);
-        StartCoroutine(WaitForProduction());
-    }
-
-    private void GiveIron()
-    {
-        if (_products.Count > 0)
-        {
-            _playerInventory.TakeResource(_products[0]);
-            _products.RemoveAt(0);
-        }
-    }*/
 
     private void CompletePotion()
     {
@@ -116,5 +54,50 @@ public class MushroomToPotionConverter : MonoBehaviour
         _potionRenderes[_clearPotions].material = _clearMat;
         _completePotions--;
         _clearPotions++;
+    }
+
+    private IEnumerator MakePotions()
+    {
+        if (_mushroomClaster.Products.Count < 1 || _completePotions >= _potionCount)
+            yield return new WaitUntil(() => _mushroomClaster.Products.Count > 0 && _completePotions < _potionCount);
+
+        while (_isMakingPotions)
+        {
+            if (_mushroomClaster.TryUseMushroom())
+            {
+                CompletePotion();
+                yield return _waitForBrew;
+            }
+            else
+            {
+                _isMakingPotions = false;
+                break;
+            }
+        }
+
+        _makePotions = null;
+        StartMakingPotions();
+    }
+
+    public void StartMakingPotions()
+    {
+        _makePotions = MakePotions();
+        _isMakingPotions = true;
+        StartCoroutine(_makePotions);
+    }
+    public void StopMakingPotions()
+    {
+        StopCoroutine(_makePotions);
+        _isMakingPotions = false;
+        _makePotions = null;
+    }
+
+    public bool TryUsePotion()
+    {
+        if (_completePotions < 1)
+            return false;
+
+        EmptyPotion();
+        return true;
     }
 }

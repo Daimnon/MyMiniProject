@@ -9,6 +9,8 @@ public class AxeProducer : WeaponProducer
     [SerializeField] private WeaponObjectPool _weaponPool;
     public override WeaponObjectPool WeaponPool { get => _weaponPool; set => _weaponPool = value; }
 
+    [SerializeField] private ResourceObjectPool _resourcePool;
+
     [Header("Production Details")]
     [SerializeField] private WeaponType _weaponType = WeaponType.Axe;
     public override WeaponType Type => _weaponType;
@@ -146,9 +148,11 @@ public class AxeProducer : WeaponProducer
 
         for (int i = 0; i < price; i++)
         {
-            if (!_playerInventory.PayResource(iron))
+            Resource paidIron = _playerInventory.PayResource(iron); // need to check why axe is not producing
+            if (!paidIron)
                 yield break;
 
+            _resourcePool.ReturnResourceToPool(paidIron);
             _currentIronCount++;
 
             if (_currentIronCount < price)

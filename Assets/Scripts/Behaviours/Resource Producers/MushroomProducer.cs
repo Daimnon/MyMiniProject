@@ -24,6 +24,8 @@ public class MushroomProducer : ResourceProducer
     [SerializeField] private bool _isFull = false;
     public override bool IsFull { get => _isFull; set => _isFull = value; }
 
+    private bool _isProducing = false;
+
     [Header("Product placements")]
     [SerializeField] private Transform[] _productsTr;
     public override Transform[] ProductsTr => _productsTr;
@@ -46,6 +48,7 @@ public class MushroomProducer : ResourceProducer
         if (_isFull)
             return;
 
+        _isProducing = true;
         int productCount = _products.Count;
         Transform productTr = null;
 
@@ -65,5 +68,26 @@ public class MushroomProducer : ResourceProducer
 
         if (!_isFull)
             Invoke(nameof(Produce), _productionTime);
+        else
+            _isProducing = false;
+    }
+    public bool TryUseMushroom()
+    {
+        if (_products.Count < 1)
+        {
+            if (!_isProducing)
+                Invoke(nameof(Produce), _productionTime);
+
+            return false;
+        }
+
+        Resource mushroomToUse = _products[^1];
+        _products.Remove(mushroomToUse);
+        _resourcePool.ReturnResourceToPool(mushroomToUse);
+
+        if (!_isProducing)
+            Invoke(nameof(Produce), _productionTime);
+
+        return true;
     }
 }

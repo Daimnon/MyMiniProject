@@ -86,6 +86,7 @@ public class PlayerInventory : MonoBehaviour
         newResource.transform.SetParent(_resourcesTr[lastResourceIndex]);
         newResource.transform.localPosition = Vector3.zero;
         newResource.transform.localRotation = Quaternion.identity;
+        newResource.IsInInventory = true;
 
         if (_resources.Count == _resourcesCarryLimit)
         {
@@ -107,6 +108,7 @@ public class PlayerInventory : MonoBehaviour
         _resourceObjectPool.ReturnResourceToPool(resourceToPay);
         _resources.Remove(resourceToPay);
         _resourceCount--;
+        resourceToPay.IsInInventory = false;
 
         if (_resourceCount == 0)
             EventManager.InvokeHoldResource(false);
@@ -140,6 +142,7 @@ public class PlayerInventory : MonoBehaviour
 
         _resources.Remove(resourceToGive);
         _resourceCount--;
+        resourceToGive.IsInInventory = false;
         _canvasRTr.gameObject.SetActive(false);
 
         return resourceToGive;

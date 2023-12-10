@@ -8,8 +8,8 @@ public class PotionProducer : ResourceProducer
     [SerializeField] private ResourceObjectPool _resourcePool;
     public override ResourceObjectPool ResourcePool { get => _resourcePool; set => _resourcePool = value; }
 
-    [SerializeField] private MushroomProducer _mushroomCluster;
-    public MushroomProducer MushroomCluster => _mushroomCluster;
+    [SerializeField] private MushroomToPotionConverter _inventory;
+    public MushroomToPotionConverter Inventory => _inventory;
 
     [Header("Production Details")]
     [SerializeField] private ResourceProducerType _type = ResourceProducerType.AlchemyTable;
@@ -18,7 +18,7 @@ public class PotionProducer : ResourceProducer
     [SerializeField] private int _upgradeFactor = 3;
     public override int UpgradeFactor { get => _upgradeFactor; }
 
-    [SerializeField] private int _maxProducts = 3;
+    [SerializeField] private int _maxProducts = 0;
     public override int MaxProducts { get => _maxProducts; set => _maxProducts = value; }
 
     [SerializeField] private float _productionTime = 1.0f;
@@ -44,7 +44,6 @@ public class PotionProducer : ResourceProducer
     private void Start()
     {
         Initialize();
-        Produce();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,10 +56,7 @@ public class PotionProducer : ResourceProducer
         if (!_playerInventory)
             return;
 
-        if (_products.Count > 0)
-            GiveIron();
-        else
-            Debug.Log("Gave all iron!");
+        Produce();
     }
     private void OnTriggerExit(Collider other)
     {
@@ -70,52 +66,14 @@ public class PotionProducer : ResourceProducer
 
     public override void Produce() // need to modify for fuel usage
     {
-        int availableMushrooms = _mushroomCluster.Products.Count;
+        if (_playerInventory.ResourceCount < _playerInventory.ResourcesCarryLimit)
+        {
+            if (!_inventory.TryUsePotion())
+                return;
 
-        /*if (_isFull)
-        {
-            StartCoroutine(WaitForProductionSpace());
-            return;
-        }
-        else if (availableMushrooms < 1)
-        {
-            StartCoroutine(WaitForProduction());
-            return;
-        }*/
-
-        int productCount = _products.Count;
-        if (productCount < _maxProducts && _productsTr[productCount].childCount < 1)
-        {
             int resourceIndex = (int)_type;
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
-            newResource.transform.position = _productsTr[productCount].position;
-            //_mushroomCluster.Complete();
-            _products.Add(newResource);
-
-            if (productCount == _maxProducts)
-                _isFull = true;
-        }
-
-        Invoke(nameof(Produce), _productionTime);
-    }
-
-    /*private IEnumerator WaitForProduction()
-    {
-        yield return new WaitUntil(() => _engine.ConvertedCoal > 0);
-        Produce();
-    }
-    private IEnumerator WaitForProductionSpace()
-    {
-        yield return new WaitUntil(() => _engine.ConvertedCoal < _maxProducts);
-        StartCoroutine(WaitForProduction());
-    }*/
-
-    private void GiveIron()
-    {
-        if (_products.Count > 0)
-        {
-            _playerInventory.TakeResource(_products[0]);
-            _products.RemoveAt(0);
+            _playerInventory.TakeResource(newResource);
         }
     }
 }

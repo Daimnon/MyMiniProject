@@ -6,7 +6,9 @@ public class Resource : MonoBehaviour
     public ResourceType Type => _type;
 
     [SerializeField] private Renderer _renderer;
+
     [SerializeField] private bool _isInInventory = false;
+    public bool IsInInventory { get => _isInInventory; set => _isInInventory = value; }
 
     private const string _playerTag = "Player";
     private void OnTriggerEnter(Collider other) // might conflict with producer's trigger - take notice.

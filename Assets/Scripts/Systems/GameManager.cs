@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum ResourceType
 {
-    Mushroom, 
+    Mushroom,
+    Potion,
     Coal,
     Iron,
     Magic,
