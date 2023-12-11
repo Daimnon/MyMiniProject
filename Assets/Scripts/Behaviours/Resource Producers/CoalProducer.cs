@@ -39,6 +39,7 @@ public class CoalProducer : ResourceProducer
     private PlayerInventory _playerInventory;
     private WaitForSeconds _timeToHit, _timeToPrepare;
     private bool _isProducing = false;
+    private IEnumerator _produce;
 
     private void Awake()
     {
@@ -55,7 +56,10 @@ public class CoalProducer : ResourceProducer
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(_playerTag))
+        {
             _playerInventory = other.GetComponent<PlayerInventory>();
+            _produce = ProductionSequence();
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -65,7 +69,7 @@ public class CoalProducer : ResourceProducer
         if (!_isProducing && _products.Count < _maxProducts)
         {
             _isProducing = true;
-            StartCoroutine(ProductionSequence());
+            StartProducing();
             return;
         }
 
@@ -74,7 +78,12 @@ public class CoalProducer : ResourceProducer
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_playerTag))
+        {
             _playerInventory = null;
+
+            if (_produce != null)
+                StopProducing();
+        }
     }
 
     public override void Produce()
@@ -89,6 +98,8 @@ public class CoalProducer : ResourceProducer
             Resource newResource = _resourcePool.GetResourceFromPool(resourceIndex);
             newResource.transform.position = _productsTr[productCount].position;
             _products.Add(newResource);
+
+            newResource.OriginTrList = _products;
 
             if (productCount == _maxProducts)
                 _isFull = true;
@@ -105,5 +116,16 @@ public class CoalProducer : ResourceProducer
 
         _pickaxeAnimator.ResetTrigger("Trigger Animation");
         _isProducing = false;
+        _produce = null;
+    }
+    private void StartProducing()
+    {
+        _produce = ProductionSequence();
+        StartCoroutine(_produce);
+    }
+    private void StopProducing()
+    {
+        StopCoroutine(_produce);
+        _produce = null;
     }
 }
