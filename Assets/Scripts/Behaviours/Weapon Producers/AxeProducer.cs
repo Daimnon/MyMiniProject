@@ -58,9 +58,9 @@ public class AxeProducer : WeaponProducer
     private List<Weapon> _largeProducts;
     public override List<Weapon> LargeProducts => _largeProducts;
 
-
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
+    private IEnumerator _produceWeapons;
 
     private void Awake()
     {
@@ -85,20 +85,18 @@ public class AxeProducer : WeaponProducer
             if (_isBusy)
                 return;
 
-            StartCoroutine(ProduceWeapon());
+            StartProducingWeapons();
         }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (!_playerInventory || _isBusy)
-            return;
-
-        StartCoroutine(ProduceWeapon());
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_playerTag))
+        {
             _playerInventory = null;
+
+            if (_produceWeapons != null)
+                StopProducingWeapons();
+        }
     }
 
     public override void Produce() // need to modify for fuel usage
@@ -156,7 +154,11 @@ public class AxeProducer : WeaponProducer
             _currentIronCount++;
 
             if (_currentIronCount < price)
+            {
+                _produceWeapons = null;
+                StartProducingWeapons();
                 yield break;
+            }
             else if (_currentIronCount == price)
                 break;
         }
@@ -165,6 +167,17 @@ public class AxeProducer : WeaponProducer
         yield return new WaitForSeconds(_productionTime);
 
         Produce();
+        _produceWeapons = null;
         _currentIronCount -= price;
+    }
+    private void StartProducingWeapons()
+    {
+        _produceWeapons = ProduceWeapon();
+        StartCoroutine(_produceWeapons);
+    }
+    private void StopProducingWeapons()
+    {
+        StopCoroutine(_produceWeapons);
+        _produceWeapons = null;
     }
 }
