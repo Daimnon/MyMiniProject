@@ -157,6 +157,8 @@ public class AxeProducer : WeaponProducer
 
             if (_currentIronCount < price)
                 yield break;
+            else if (_currentIronCount == price)
+                break;
         }
         
         _isBusy = true;

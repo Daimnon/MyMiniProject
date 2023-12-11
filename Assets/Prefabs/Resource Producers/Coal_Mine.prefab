@@ -35,7 +35,7 @@ Transform:
   - {fileID: 1971226297862123847}
   - {fileID: 315481190208757297}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &9075167603732316823
 BoxCollider:
@@ -71,7 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourcePool: {fileID: 0}
-  _type: 1
+  _type: 2
+  _upgradeFactor: 3
   _maxProducts: 3
   _productionTime: 4
   _isFull: 0
@@ -516,6 +517,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 880930217657286985}
+    - targetCorrespondingSourceObject: {fileID: 167114, guid: 7473a5138ccf3844a9cd93d43675b88e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8164731163827863086}
   m_SourcePrefab: {fileID: 100100000, guid: 7473a5138ccf3844a9cd93d43675b88e, type: 3}
 --- !u!4 &534884274195877693 stripped
 Transform:
@@ -550,6 +555,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.148758, y: 0.5336641, z: 2.9372406}
   m_Center: {x: 0, y: 0.26683205, z: -0.0000076293945}
+--- !u!114 &8164731163827863086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534884274196095025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0.99
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1971226297862202017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -631,6 +654,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4702704238301979569}
+    - targetCorrespondingSourceObject: {fileID: 130572, guid: 48a47585ce7445a45be25cba3537114e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7463497990052695346}
   m_SourcePrefab: {fileID: 100100000, guid: 48a47585ce7445a45be25cba3537114e, type: 3}
 --- !u!4 &1971226297862123847 stripped
 Transform:
@@ -681,6 +708,24 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &7463497990052695346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971226297862315181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0.99
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &6106880670478500578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -762,6 +807,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1052564422386394554}
+    - targetCorrespondingSourceObject: {fileID: 125738, guid: 2bb05180d449f054db988e976c6dadae,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5751609227060078455}
   m_SourcePrefab: {fileID: 100100000, guid: 2bb05180d449f054db988e976c6dadae, type: 3}
 --- !u!1 &6106880670478625224 stripped
 GameObject:
@@ -790,6 +839,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.376474, y: 0.7670845, z: 0.5477371}
   m_Center: {x: 0.00000023841858, y: -0.000000014901161, z: 0.0000019073486}
+--- !u!114 &5751609227060078455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106880670478625224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0.99
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &6106880670478650928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 412882, guid: 2bb05180d449f054db988e976c6dadae,
