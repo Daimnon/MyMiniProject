@@ -143,6 +143,10 @@ public class PlayerInventory : MonoBehaviour
         _resources.Remove(resourceToGive);
         _resourceCount--;
         resourceToGive.IsInInventory = false;
+
+        if (_resourceCount == 0)
+            EventManager.InvokeHoldResource(false);
+
         _canvasRTr.gameObject.SetActive(false);
 
         return resourceToGive;
