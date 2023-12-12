@@ -78,12 +78,7 @@ public class CoalProducer : ResourceProducer
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_playerTag))
-        {
             _playerInventory = null;
-
-            if (_produce != null)
-                StopProducing();
-        }
     }
 
     public override void Produce()
