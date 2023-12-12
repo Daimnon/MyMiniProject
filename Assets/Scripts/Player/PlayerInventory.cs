@@ -15,6 +15,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private int _resourcesCarryLimit = 3;
     public int ResourcesCarryLimit => _resourcesCarryLimit;
 
+    [SerializeField] private float _maxTextOffset = 0.5f;
+
     [SerializeField] private List<Transform> _resourcesTr;
     public List<Transform> ResourcesTr => _resourcesTr;
 
@@ -50,6 +52,18 @@ public class PlayerInventory : MonoBehaviour
         EventManager.InvokeHoldResource(isHoldingResource);
     }
 
+    private void ShowMaxResourcesText(bool shouldShow)
+    {
+        if (shouldShow)
+        {
+            _canvasRTr.anchoredPosition = new Vector2(0, _resources[_resourceCount - 1].transform.position.y + _maxTextOffset);
+            _canvasRTr.gameObject.SetActive(true);
+        }
+        else
+        {
+            _canvasRTr.gameObject.SetActive(false);
+        }
+    }
     public void EarnCurrency(int addedCurrency)
     {
         _currency += addedCurrency;
@@ -86,12 +100,10 @@ public class PlayerInventory : MonoBehaviour
         newResource.transform.SetParent(_resourcesTr[lastResourceIndex]);
         newResource.transform.localPosition = Vector3.zero;
         newResource.transform.localRotation = Quaternion.identity;
-        newResource.IsInInventory = true;
+        newResource.IsInInventory = true;   
 
         if (_resources.Count == _resourcesCarryLimit)
         {
-            string maxItemCountTxt = _resourcesCarryLimit.ToString();
-            _resourceTxt.text = maxItemCountTxt + "/" + maxItemCountTxt;
             _canvasRTr.anchoredPosition = new Vector2(0, _resources[lastResourceIndex].transform.position.y);
             _canvasRTr.gameObject.SetActive(true);
         }
