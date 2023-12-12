@@ -2419,19 +2419,19 @@ PrefabInstance:
         type: 3}
       propertyPath: _resourcePrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 8349844611747071222, guid: f4972d95f0762364a8d0fa0ada2f3815,
+      objectReference: {fileID: 5873434793844303743, guid: 4799986f1e1acdc45852ac9633c379e8,
         type: 3}
     - target: {fileID: 6309087863073461385, guid: 257ec6fb1a07bb84eb4ee4ba8cd48cb9,
         type: 3}
       propertyPath: _resourcePrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 8349844611747071222, guid: f4972d95f0762364a8d0fa0ada2f3815,
+      objectReference: {fileID: 7115117213776136459, guid: 610fb7a5c9b9edb4abd452fc527e15b2,
         type: 3}
     - target: {fileID: 6309087863073461385, guid: 257ec6fb1a07bb84eb4ee4ba8cd48cb9,
         type: 3}
       propertyPath: _resourcePrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 8349844611747071222, guid: f4972d95f0762364a8d0fa0ada2f3815,
+      objectReference: {fileID: 7115117213776136459, guid: 610fb7a5c9b9edb4abd452fc527e15b2,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
