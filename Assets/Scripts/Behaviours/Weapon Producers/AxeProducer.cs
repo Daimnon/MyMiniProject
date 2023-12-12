@@ -91,12 +91,7 @@ public class AxeProducer : WeaponProducer
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_playerTag))
-        {
             _playerInventory = null;
-
-            if (_produceWeapons != null)
-                StopProducingWeapons();
-        }
     }
 
     public override void Produce() // need to modify for fuel usage
