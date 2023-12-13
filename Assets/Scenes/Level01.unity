@@ -2034,6 +2034,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trader
       objectReference: {fileID: 0}
+    - target: {fileID: 5406645507939859831, guid: e3696d73b3f59ab41a355c0da4a19b9d,
+        type: 3}
+      propertyPath: _currencyObjectPool
+      value: 
+      objectReference: {fileID: 2354691103924192078}
     - target: {fileID: 7817750961255234974, guid: e3696d73b3f59ab41a355c0da4a19b9d,
         type: 3}
       propertyPath: m_RootOrder

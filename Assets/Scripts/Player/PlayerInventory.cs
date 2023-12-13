@@ -48,7 +48,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Awake()
     {
-        _weapon = new List<Weapon>();
+        _weapon = new List<Weapon>(1) { null };
     }
     private void Start()
     {
@@ -171,6 +171,9 @@ public class PlayerInventory : MonoBehaviour
     {
         if (_weapon.Count < 1)
             return;
+
+        if (!_weapon[^1])
+            _weapon.Remove(_weapon[^1]);
 
         _weapon.Add(newWeapon);
         EventManager.InvokeHoldWeapon(true);

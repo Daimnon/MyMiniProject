@@ -6,6 +6,8 @@ public class Trader : MonoBehaviour
 {
     [SerializeField] private GameObject _currencyPrefab;
     public GameObject CurrencyPrefab => _currencyPrefab;
+    
+    [SerializeField] private CurrencyObjectPool _currencyObjectPool;
 
     [SerializeField] private Transform[] _productsTr;
     public Transform[] ProductsTr => _productsTr;
@@ -13,7 +15,6 @@ public class Trader : MonoBehaviour
     [SerializeField] private int[] _typePriceFactor = new int[3], _rarityPriceFactor = new int[3], _sizePriceFactor = new int[3];
 
     private List<Adventurer> _adventurers;
-    private CurrencyObjectPool _currencyObjectPool;
     private PlayerInventory _playerInventory;
     private const string _playerTag = "Player";
     private const string _aiTag = "AI";
@@ -37,7 +38,7 @@ public class Trader : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(_playerTag) && _playerInventory.Weapon.Count > 0 && _adventurers.Count > 0)
+        if (other.CompareTag(_playerTag) && _playerInventory.Weapon[0] && _adventurers.Count > 0)
         {
             SellWeapon(_playerInventory.GiveWeapon());
             _adventurers.RemoveAt(0);
