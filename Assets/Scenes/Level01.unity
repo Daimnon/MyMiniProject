@@ -691,6 +691,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &940718869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5085258638738653822, guid: 55749d9636118994794f555f1a5fbfb3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8040782629413730975}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1039611d7879a7e4dbcaf69c768cfb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &945752093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9019177309033790232, guid: 55749d9636118994794f555f1a5fbfb3,
@@ -2101,6 +2113,11 @@ PrefabInstance:
       propertyPath: _weaponPool
       value: 
       objectReference: {fileID: 1047933314}
+    - target: {fileID: 8075105220716294824, guid: e7ace858900cd8b4e8b058e85d214ec7,
+        type: 3}
+      propertyPath: _weaponRack
+      value: 
+      objectReference: {fileID: 940718869}
     - target: {fileID: 8075105220716294824, guid: e7ace858900cd8b4e8b058e85d214ec7,
         type: 3}
       propertyPath: _resourcePool

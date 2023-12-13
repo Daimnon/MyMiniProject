@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1716029205181392617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2262109831210920570}
+  m_Layer: 0
+  m_Name: Inventory_Small_Weapon_Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2262109831210920570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716029205181392617}
+  m_LocalRotation: {x: 0.27059743, y: 0.6532814, z: -0.27059773, w: 0.65328205}
+  m_LocalPosition: {x: -0.045, y: 0.22080266, z: -0.225}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1336682113178595924}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 45, y: 90, z: 0}
 --- !u!1 &1738420046512649340
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3614947929217220769}
   m_Layer: 0
-  m_Name: Inventory Positions
+  m_Name: Inventory_Positions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +212,7 @@ GameObject:
   - component: {fileID: 4230551254974532576}
   - component: {fileID: 797230853124949585}
   m_Layer: 0
-  m_Name: Inventory WorldUI
+  m_Name: Inventory_WorldUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,6 +351,7 @@ Transform:
   - {fileID: 1690260210788783612}
   - {fileID: 6168501149337419230}
   - {fileID: 3614947929217220769}
+  - {fileID: 2262109831210920570}
   m_Father: {fileID: 0}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -446,7 +478,8 @@ MonoBehaviour:
   _resources: []
   _resourceCount: 0
   _weaponCarryLimit: 1
-  _weaponsTr: []
+  _weaponsTr:
+  - {fileID: 2262109831210920570}
   _weaponObjectPool: {fileID: 0}
   _canvasRTr: {fileID: 6168501149337419230}
   _currencyTxt: {fileID: 0}

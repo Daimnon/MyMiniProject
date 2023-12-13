@@ -10,6 +10,7 @@ public class AxeProducer : WeaponProducer
     public override WeaponObjectPool WeaponPool { get => _weaponPool; set => _weaponPool = value; }
 
     [SerializeField] private ResourceObjectPool _resourcePool;
+    [SerializeField] private WeaponsRack _weaponRack;
 
     [Header("Production Details")]
     [SerializeField] private WeaponType _weaponType = WeaponType.Axe;
@@ -118,6 +119,8 @@ public class AxeProducer : WeaponProducer
                 break;
         }
 
+        _weaponRack.Placements ??= productsTr; // if null get ref to productsTr
+
         int productCount = _smallProducts.Count + _mediumProducts.Count + _largeProducts.Count;
         if (productCount < _maxProducts && productsTr[productCount].childCount < 1)
         {
@@ -126,6 +129,7 @@ public class AxeProducer : WeaponProducer
             newWeapon.transform.localPosition = Vector3.zero;
             newWeapon.transform.localRotation = Quaternion.identity;
             currentProducts.Add(newWeapon);
+            _weaponRack.Weapons = currentProducts;
             _isBusy = false;
 
             if (productCount == _maxProducts)
