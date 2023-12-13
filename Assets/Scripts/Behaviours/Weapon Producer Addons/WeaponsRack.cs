@@ -13,6 +13,11 @@ public class WeaponsRack : MonoBehaviour
     private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
 
+    private void Awake()
+    {
+        _weapons = new List<Weapon>();
+        _placements = new Transform[0];
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (_weapons != null && other.CompareTag(_playerTag))

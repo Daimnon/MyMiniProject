@@ -39,13 +39,17 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private WeaponObjectPool _weaponObjectPool;
     public WeaponObjectPool WeaponObjectPool => _weaponObjectPool;
 
-    private List<Weapon> _weapon = new List<Weapon>(1) { null };
+    private List<Weapon> _weapon;
     public List<Weapon> Weapon => _weapon;
 
     [Header("UI")]
     [SerializeField] private RectTransform _canvasRTr;
     [SerializeField] private TextMeshProUGUI _currencyTxt, _resourceTxt;
 
+    private void Awake()
+    {
+        _weapon = new List<Weapon>();
+    }
     private void Start()
     {
         bool isHoldingResource = _resources.Count > 0 ? true : false;

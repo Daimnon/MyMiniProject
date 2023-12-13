@@ -28,17 +28,16 @@ public class Trader : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag(_playerTag))
-            return;
-
-        if (!_playerInventory)
+        if (other.CompareTag(_aiTag)) // do entering animation on self
+            _adventurers.Add(other.GetComponent<Adventurer>());
+        else if (other.CompareTag(_playerTag) && !_playerInventory)
             _playerInventory = other.GetComponent<PlayerInventory>();
-
-        // do entering animation on self
+        else
+            return;
     }
     private void OnTriggerStay(Collider other)
     {
-        if (_playerInventory.Weapon.Count > 0 && _adventurers.Count > 0)
+        if (other.CompareTag(_playerTag) && _playerInventory.Weapon.Count > 0 && _adventurers.Count > 0)
         {
             SellWeapon(_playerInventory.GiveWeapon());
             _adventurers.RemoveAt(0);
@@ -47,12 +46,12 @@ public class Trader : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag(_playerTag))
+        if (other.CompareTag(_aiTag))
+            _adventurers.Remove(other.GetComponent<Adventurer>());
+        else if (other.CompareTag(_playerTag)) // do exiting animation on self
+            _playerInventory = null;
+        else
             return;
-
-        _playerInventory = null;
-
-        // do exiting animation on self
     }
     private void SellWeapon(Weapon weaponToSell)
     {
