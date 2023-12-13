@@ -176,6 +176,14 @@ public class PlayerInventory : MonoBehaviour
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localRotation = Quaternion.identity;
     }
+    public Weapon GiveWeapon()
+    {
+        Weapon currentWeapon = _weapon[0];
+        _weapon.Remove(currentWeapon);
+        //_canvasRTr.gameObject.SetActive(false);
+
+        return currentWeapon;
+    }
     public Weapon GiveWeapon(WeaponType type, WeaponRarity rarity, WeaponSize size)
     {
         Weapon currentWeapon = _weapon[0];
