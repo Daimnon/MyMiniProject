@@ -6,6 +6,7 @@ using UnityEngine;
 public static class EventManager
 {
     public static Action OnGameLaunched, OnLevelLaunched, OnOpenMenu;
+    public static Action OnBakeNavMesh;
     public static Action<bool> OnHoldResource, OnHoldWeapon;
     public static Action<int> OnEarnCurrency;
     public static Action<int> OnPayCurrency;
@@ -25,6 +26,12 @@ public static class EventManager
     {
         OnOpenMenu?.Invoke();
         UnityEngine.Debug.Log("Event: OpenMenu");
+    }
+
+    public static void InvokeBakeNavMesh()
+    {
+        OnBakeNavMesh?.Invoke();
+        UnityEngine.Debug.Log("Event: BakeNavMesh");
     }
 
     public static void InvokeHoldResource(bool isHoldingResource)

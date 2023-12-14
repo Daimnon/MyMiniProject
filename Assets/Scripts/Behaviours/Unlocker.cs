@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class Unlocker : MonoBehaviour
@@ -30,7 +31,8 @@ public class Unlocker : MonoBehaviour
     }
     private void Unlock()
     {
-        Instantiate(_unlockablePrefab, _spawnPos.position, Quaternion.identity);
+        Instantiate(_unlockablePrefab, _spawnPos.position, _spawnPos.rotation);
+        EventManager.InvokeBakeNavMesh();
         Destroy(gameObject);
     }
 

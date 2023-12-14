@@ -53,6 +53,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WeaponObjectPool _weaponPool;
     public WeaponObjectPool WeaponPool => _weaponPool;
 
+    [SerializeField] private Camera _mainCam;
+    public Camera MainCam => _mainCam;
+
     private void Awake()
     {
         if (_instance == null)
