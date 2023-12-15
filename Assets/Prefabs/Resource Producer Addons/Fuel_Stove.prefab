@@ -39,7 +39,7 @@ Transform:
   - {fileID: 4472388017879504379}
   - {fileID: 6647844555928245887}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &3557987358764838470
 BoxCollider:
@@ -162,10 +162,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 179310, guid: e657c22f66e1a6a4ba85153eed847119,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6856734515352930740}
-    - targetCorrespondingSourceObject: {fileID: 179310, guid: e657c22f66e1a6a4ba85153eed847119,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6864962005603207360}
   m_SourcePrefab: {fileID: 100100000, guid: e657c22f66e1a6a4ba85153eed847119, type: 3}
 --- !u!1 &511747444150359107 stripped
@@ -195,22 +191,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.74684834, y: 2.3360717, z: 0.74684644}
   m_Center: {x: 0.0000019073486, y: 1.1680359, z: 0.0000009536743}
---- !u!114 &6856734515352930740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511747444150359107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93180567ee0128143b5f1c8bc54cdd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _resourceObjectPool: {fileID: 0}
-  _convertedCoal: 0
-  _productionTime: 0.5
-  _maxCoal: 3
 --- !u!114 &6864962005603207360
 MonoBehaviour:
   m_ObjectHideFlags: 0

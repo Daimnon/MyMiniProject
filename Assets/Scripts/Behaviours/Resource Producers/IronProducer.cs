@@ -44,6 +44,7 @@ public class IronProducer : ResourceProducer
     }
     private void Start()
     {
+        EventManager.InvokeForgeUnlocked(this);
         Initialize();
         StartCoroutine(WaitForFuelStove());
     }

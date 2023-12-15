@@ -37,16 +37,9 @@ public class Unlocker : MonoBehaviour
     }
     protected void SpawnNewProp()
     {
-        GameObject newProp = Instantiate(_unlockablePrefab, _spawnPos.position, _spawnPos.rotation);
-
-        if (_isForge)
-        {
-            IronProducer forge = newProp.GetComponent<IronProducer>();
-            EventManager.InvokeForgeUnlocked(forge);
-        }
+        Instantiate(_unlockablePrefab, _spawnPos.position, _spawnPos.rotation);
         EventManager.InvokeBakeNavMesh();
-
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     protected virtual void Unlock()
     {
