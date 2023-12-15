@@ -11,7 +11,7 @@ public class Unlocker : MonoBehaviour
     [SerializeField] protected Transform _spawnPos;
     [SerializeField] private TextMeshProUGUI _currentPriceTxt;
     [SerializeField] private int _priceToUnlock = 3, _amountToCharge = 1;
-    [SerializeField] private bool _isFuelStove = false;
+    [SerializeField] private bool _isForge = false;
 
     private PlayerInventory _playerInventory;
     private const string _playerTag = "Player";
@@ -38,12 +38,15 @@ public class Unlocker : MonoBehaviour
     protected void SpawnNewProp()
     {
         GameObject newProp = Instantiate(_unlockablePrefab, _spawnPos.position, _spawnPos.rotation);
+
+        if (_isForge)
+        {
+            IronProducer forge = newProp.GetComponent<IronProducer>();
+            EventManager.InvokeForgeUnlocked(forge);
+        }
         EventManager.InvokeBakeNavMesh();
 
-        if (_isFuelStove)
-            EventManager.InvokeFuelStoveUnlocked(newProp.GetComponent<FuelStove>());
-
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     protected virtual void Unlock()
     {

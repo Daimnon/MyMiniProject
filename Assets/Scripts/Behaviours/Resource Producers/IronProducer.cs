@@ -10,7 +10,7 @@ public class IronProducer : ResourceProducer
     public override ResourceObjectPool ResourcePool { get => _resourcePool; set => _resourcePool = value; }
 
     [SerializeField] private FuelStove _engine;
-    public FuelStove Engine => _engine;
+    public FuelStove Engine { get => _engine; set => _engine = value; }
 
     [Header("Production Details")]
     [SerializeField] private ResourceProducerType _type = ResourceProducerType.Forge;
@@ -42,18 +42,10 @@ public class IronProducer : ResourceProducer
     {
         _products = new List<Resource>();
     }
-    private void OnEnable()
-    {
-        EventManager.OnFuelStoveUnlocked += OnFuelStoveUnlocked;
-    }
     private void Start()
     {
         Initialize();
         StartCoroutine(WaitForFuelStove());
-    }
-    private void OnDisable()
-    {
-        EventManager.OnFuelStoveUnlocked -= OnFuelStoveUnlocked;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -131,12 +123,5 @@ public class IronProducer : ResourceProducer
             _playerInventory.TakeResource(_products[0]);
             _products.RemoveAt(0);
         }
-    }
-    private void OnFuelStoveUnlocked(FuelStove fuelStove)
-    {
-        if (_engine)
-            return;
-
-        _engine = fuelStove;
     }
 }

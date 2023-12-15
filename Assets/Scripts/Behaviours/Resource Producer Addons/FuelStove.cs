@@ -28,10 +28,18 @@ public class FuelStove : ResourceProducerAddon
     {
         _coal = new List<Resource>();
     }
+    private void OnEnable()
+    {
+        EventManager.OnForgeUnlocked += OnForgeUnlocked;
+    }
     private void Start()
     {
         Initialize();
         ConvertCoal();
+    }
+    private void OnDisable()
+    {
+        EventManager.OnForgeUnlocked -= OnForgeUnlocked;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,5 +101,10 @@ public class FuelStove : ResourceProducerAddon
     {
         yield return new WaitUntil(()=> _coal.Count > 0);
         ConvertCoal();
+    }
+
+    private void OnForgeUnlocked(IronProducer forge)
+    {
+        forge.Engine = this;
     }
 }

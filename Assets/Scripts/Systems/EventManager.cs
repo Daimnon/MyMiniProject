@@ -11,7 +11,7 @@ public static class EventManager
     public static Action<int> OnEarnCurrency;
     public static Action<int> OnPayCurrency;
     public static Action<Resource> OnTakeResource, OnPayFirstResource, OnPayResource;
-    public static Action<FuelStove> OnFuelStoveUnlocked;
+    public static Action<IronProducer> OnForgeUnlocked;
 
     public static void InvokeGameLaunched()
     {
@@ -35,10 +35,10 @@ public static class EventManager
         UnityEngine.Debug.Log("Event: BakeNavMesh");
     }
 
-    public static void InvokeFuelStoveUnlocked(FuelStove fuelStove)
+    public static void InvokeForgeUnlocked(IronProducer forge)
     {
-        OnFuelStoveUnlocked?.Invoke(fuelStove);
-        UnityEngine.Debug.Log("Event: FuelStoveUnlocked");
+        OnForgeUnlocked?.Invoke(forge);
+        UnityEngine.Debug.Log("Event: ForgeUnlocked");
     }
 
     public static void InvokeHoldResource(bool isHoldingResource)
