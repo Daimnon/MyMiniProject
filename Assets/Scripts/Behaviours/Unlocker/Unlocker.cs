@@ -6,13 +6,16 @@ using UnityEngine;
 
 public class Unlocker : MonoBehaviour
 {
-    [SerializeField] private GameObject _unlockablePrefab;
-    [SerializeField] private Transform _spawnPos;
+    [Header("Details")]
+    [SerializeField] protected GameObject _unlockablePrefab;
+    [SerializeField] protected Transform _spawnPos;
     [SerializeField] private TextMeshProUGUI _currentPriceTxt;
     [SerializeField] private int _priceToUnlock = 3, _amountToCharge = 1;
+    [SerializeField] private bool _isFuelStove = false;
 
-    private const string _playerTag = "Player";
     private PlayerInventory _playerInventory;
+    private const string _playerTag = "Player";
+    private bool _isUnlocked = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,23 +29,34 @@ public class Unlocker : MonoBehaviour
         _priceToUnlock -= paidAmount;
         _currentPriceTxt.text = _priceToUnlock.ToString();
 
-        if (_priceToUnlock <= 0)
+        if (!_isUnlocked && _priceToUnlock <= 0)
+        {
+            _isUnlocked = true;
             Unlock();
+        }
     }
-    private void Unlock()
+    protected void SpawnNewProp()
     {
-        Instantiate(_unlockablePrefab, _spawnPos.position, _spawnPos.rotation);
+        GameObject newProp = Instantiate(_unlockablePrefab, _spawnPos.position, _spawnPos.rotation);
         EventManager.InvokeBakeNavMesh();
+
+        if (_isFuelStove)
+            EventManager.InvokeFuelStoveUnlocked(newProp.GetComponent<FuelStove>());
+
         Destroy(gameObject);
+    }
+    protected virtual void Unlock()
+    {
+        SpawnNewProp();
     }
 
     /*[SerializeField] private Transform[] _edgeSprites;
-[SerializeField] private bool _isIdle = true;*/
+      [SerializeField] private bool _isIdle = true;*/
     /*private void Update()
-    {
+      {
         if (!_isIdle)
             return;
 
         // breathing animation for edge pieces
-    }*/
+      }*/
 }

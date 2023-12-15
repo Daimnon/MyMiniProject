@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
+    [SerializeField] private Camera _mainCam;
+    public Camera MainCam => _mainCam;
+
     [SerializeField] private CurrencyObjectPool _currencyPool;
     public CurrencyObjectPool CurrencyPool => _currencyPool;
 
@@ -52,9 +55,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private WeaponObjectPool _weaponPool;
     public WeaponObjectPool WeaponPool => _weaponPool;
-
-    [SerializeField] private Camera _mainCam;
-    public Camera MainCam => _mainCam;
 
     private void Awake()
     {

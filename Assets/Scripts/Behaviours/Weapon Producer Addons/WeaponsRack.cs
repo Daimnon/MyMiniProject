@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponsRack : MonoBehaviour
+public class WeaponsRack : WeaponProducerAddon
 {
     private Transform[] _placements = null;
     public Transform[] Placements { get => _placements; set => _placements = value; }

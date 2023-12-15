@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FuelStove : MonoBehaviour
+public class FuelStove : ResourceProducerAddon
 {
     [SerializeField] private ResourceObjectPool _resourceObjectPool;
 
@@ -33,6 +33,7 @@ public class FuelStove : MonoBehaviour
         Initialize();
         ConvertCoal();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(_playerTag))

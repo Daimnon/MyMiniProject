@@ -42,10 +42,18 @@ public class IronProducer : ResourceProducer
     {
         _products = new List<Resource>();
     }
+    private void OnEnable()
+    {
+        EventManager.OnFuelStoveUnlocked += OnFuelStoveUnlocked;
+    }
     private void Start()
     {
         Initialize();
-        Produce();
+        StartCoroutine(WaitForFuelStove());
+    }
+    private void OnDisable()
+    {
+        EventManager.OnFuelStoveUnlocked -= OnFuelStoveUnlocked;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -105,6 +113,11 @@ public class IronProducer : ResourceProducer
         yield return new WaitUntil(() => _engine.ConvertedCoal > 0);
         Produce();
     }
+    private IEnumerator WaitForFuelStove()
+    {
+        yield return new WaitUntil(() => _engine != null);
+        StartCoroutine(WaitForProduction());
+    }
     private IEnumerator WaitForProductionSpace()
     {
         yield return new WaitUntil(() => _engine.ConvertedCoal < _maxProducts);
@@ -118,5 +131,12 @@ public class IronProducer : ResourceProducer
             _playerInventory.TakeResource(_products[0]);
             _products.RemoveAt(0);
         }
+    }
+    private void OnFuelStoveUnlocked(FuelStove fuelStove)
+    {
+        if (_engine)
+            return;
+
+        _engine = fuelStove;
     }
 }
