@@ -1653,10 +1653,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7817750961255234974}
   - component: {fileID: 4548669346383922948}
-  - component: {fileID: 5406645507939859831}
   - component: {fileID: 3399000883231744332}
+  - component: {fileID: 5406645507939859831}
   m_Layer: 7
-  m_Name: Trader
+  m_Name: Weapon_Trader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1674,10 +1674,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3649454865899872167}
+  - {fileID: 4455875570853068983}
   - {fileID: 6883673757256316840}
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &4548669346383922948
 BoxCollider:
@@ -1700,6 +1700,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.5, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 2.4}
+--- !u!65 &3399000883231744332
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973463019457365273}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.5, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: -3.4}
 --- !u!114 &5406645507939859831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,27 +1919,6 @@ MonoBehaviour:
   _typePriceFactor: 010000000200000003000000
   _rarityPriceFactor: 010000000300000005000000
   _sizePriceFactor: 010000000200000004000000
---- !u!65 &3399000883231744332
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2973463019457365273}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5, y: 1, z: 2}
-  m_Center: {x: 0, y: 0, z: -3.4}
 --- !u!1 &3005553188187756246
 GameObject:
   m_ObjectHideFlags: 0
@@ -6142,7 +6142,7 @@ PrefabInstance:
     - target: {fileID: 2349650, guid: edd815d6828cbde439a3373e1f684ff4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 54061fa668860e54a8e96694301d76a9, type: 2}
+      objectReference: {fileID: 2100000, guid: 41371e2975c7a5e4599ab53ebe28b473, type: 2}
     m_RemovedComponents:
     - {fileID: 64966674053914456, guid: edd815d6828cbde439a3373e1f684ff4, type: 3}
     m_RemovedGameObjects: []
@@ -6157,13 +6157,13 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1092793589182477829}
   m_SourcePrefab: {fileID: 100100000, guid: edd815d6828cbde439a3373e1f684ff4, type: 3}
---- !u!4 &3649454865899872167 stripped
+--- !u!4 &4455875570853068983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 407522, guid: edd815d6828cbde439a3373e1f684ff4,
     type: 3}
   m_PrefabInstance: {fileID: 4455875570853476181}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3649454865900340411 stripped
+--- !u!1 &4455875570853354411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 126206, guid: edd815d6828cbde439a3373e1f684ff4,
     type: 3}
@@ -6175,7 +6175,7 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3649454865900340411}
+  m_GameObject: {fileID: 4455875570853354411}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -6196,7 +6196,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3649454865900340411}
+  m_GameObject: {fileID: 4455875570853354411}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}

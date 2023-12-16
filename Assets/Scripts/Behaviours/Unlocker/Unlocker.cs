@@ -45,6 +45,7 @@ public class Unlocker : MonoBehaviour
     }
     protected virtual void Unlock()
     {
+        EventManager.InvokeUnlock();
         SpawnNewProp();
     }
 }

@@ -6,16 +6,15 @@ public class Trader : MonoBehaviour
 {
     [SerializeField] private GameObject _currencyPrefab;
     public GameObject CurrencyPrefab => _currencyPrefab;
-    
-    [SerializeField] private CurrencyObjectPool _currencyObjectPool;
 
     [SerializeField] private Transform[] _productsTr;
     public Transform[] ProductsTr => _productsTr;
 
     [SerializeField] private int[] _typePriceFactor = new int[3], _rarityPriceFactor = new int[3], _sizePriceFactor = new int[3];
 
-    private List<Adventurer> _adventurers;
+    private CurrencyObjectPool _currencyObjectPool;
     private PlayerInventory _playerInventory;
+    private List<Adventurer> _adventurers;
     private const string _playerTag = "Player";
     private const string _aiTag = "AI";
 

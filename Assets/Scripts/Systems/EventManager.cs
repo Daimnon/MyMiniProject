@@ -7,6 +7,7 @@ public static class EventManager
 {
     public static Action OnGameLaunched, OnLevelLaunched, OnOpenMenu;
     public static Action OnBakeNavMesh;
+    public static Action OnUnlock;
     public static Action<bool> OnHoldResource, OnHoldWeapon;
     public static Action<int> OnEarnCurrency;
     public static Action<int> OnPayCurrency;
@@ -30,29 +31,16 @@ public static class EventManager
         UnityEngine.Debug.Log("Event: OpenMenu");
     }
 
+    public static void InvokeUnlock()
+    {
+        OnUnlock?.Invoke();
+        UnityEngine.Debug.Log("Event: Unlock");
+    }
+
     public static void InvokeBakeNavMesh()
     {
         OnBakeNavMesh?.Invoke();
         UnityEngine.Debug.Log("Event: BakeNavMesh");
-    }
-
-    public static void InvokeForgeUnlocked(IronProducer forge)
-    {
-        OnForgeUnlocked?.Invoke(forge);
-        UnityEngine.Debug.Log("Event: ForgeUnlocked");
-    }
-
-    public static void InvokeAnvilUnlocked(WeaponProducer weaponProducer)
-    {
-        if (weaponProducer is AxeProducer)
-            OnAnvilUnlocked?.Invoke(weaponProducer as AxeProducer);
-
-        UnityEngine.Debug.Log("Event: AnvilUnlocked");
-    }
-    public static void InvokeAnyAnvilUnlocked(WeaponProducer weaponProducer)
-    {
-        OnAnyAnvilUnlocked?.Invoke(weaponProducer);
-        UnityEngine.Debug.Log("Event: AnyAnvilUnlocked");
     }
 
     public static void InvokeHoldResource(bool isHoldingResource)
@@ -79,6 +67,7 @@ public static class EventManager
         OnPayCurrency?.Invoke(price);
         UnityEngine.Debug.Log($"Event: PayCurrency, Price: {price}");
     }
+
     public static void InvokeTakeResource(Resource resource)
     {
         if (resource != null)
@@ -102,5 +91,24 @@ public static class EventManager
             OnPayResource?.Invoke(resource);
             UnityEngine.Debug.Log($"Event: PayResource, ResourceType: {resource.Type.ToString()}");
         }
+    }
+
+    public static void InvokeForgeUnlocked(IronProducer forge)
+    {
+        OnForgeUnlocked?.Invoke(forge);
+        UnityEngine.Debug.Log("Event: ForgeUnlocked");
+    }
+
+    public static void InvokeAnvilUnlocked(WeaponProducer weaponProducer)
+    {
+        if (weaponProducer is AxeProducer)
+            OnAnvilUnlocked?.Invoke(weaponProducer as AxeProducer);
+
+        UnityEngine.Debug.Log("Event: AnvilUnlocked");
+    }
+    public static void InvokeAnyAnvilUnlocked(WeaponProducer weaponProducer)
+    {
+        OnAnyAnvilUnlocked?.Invoke(weaponProducer);
+        UnityEngine.Debug.Log("Event: AnyAnvilUnlocked");
     }
 }

@@ -209,7 +209,6 @@ GameObject:
   - component: {fileID: 6168501149337419230}
   - component: {fileID: 8047470179205140442}
   - component: {fileID: 2184972936423484886}
-  - component: {fileID: 4230551254974532576}
   - component: {fileID: 797230853124949585}
   m_Layer: 0
   m_Name: Inventory_WorldUI
@@ -256,7 +255,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -285,23 +284,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &4230551254974532576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2825527878701770388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &797230853124949585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1dcb4c4d5cbdc244ad9a4a66f011b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _worldUI: {fileID: 0}
+  _worldUI: {fileID: 8047470179205140442}
   _mainCamTr: {fileID: 0}
 --- !u!1 &4658901336399500275
 GameObject:
@@ -354,7 +336,7 @@ Transform:
   - {fileID: 3614947929217220769}
   - {fileID: 2262109831210920570}
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &5462367335997840415
 CapsuleCollider:
@@ -946,7 +928,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2ae5c843dc605dc44b452ab72b95724e, type: 2}
+      objectReference: {fileID: 2100000, guid: 0bb48ed1dd861a44c92e1df3580efacb, type: 2}
     - target: {fileID: 8592876449707639036, guid: 6b5d591dbb72ac04a80d42bbb710cb7a,
         type: 3}
       propertyPath: m_Materials.Array.data[1]

@@ -70,7 +70,7 @@ Transform:
   - {fileID: 4873268289924482103}
   - {fileID: 6237446554223268796}
   m_Father: {fileID: 0}
-  m_RootOrder: 41
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3342744757246505343
 BoxCollider:
@@ -633,7 +633,6 @@ GameObject:
   - component: {fileID: 2169163007303196375}
   - component: {fileID: 1738066889938288672}
   - component: {fileID: 3872491387942923912}
-  - component: {fileID: 7772211388116802470}
   - component: {fileID: 2621333512315690654}
   m_Layer: 0
   m_Name: Unlocker_WorldUI
@@ -709,23 +708,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &7772211388116802470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8255482586902399024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &2621333512315690654
 MonoBehaviour:
   m_ObjectHideFlags: 0
