@@ -23,6 +23,9 @@ public class Unlocker : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        if (_isUnlocked)
+            return;
+
         int paidAmount = _playerInventory.PayCurrency(_amountToCharge);
         EventManager.InvokePayCurrency(paidAmount);
         _priceToUnlock -= paidAmount;

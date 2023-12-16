@@ -6,6 +6,8 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public abstract class WeaponProducer : MonoBehaviour
 {
     public abstract WeaponObjectPool WeaponPool { get; set; }
+    public abstract ResourceObjectPool ResourcePool { get; set; }
+    public abstract WeaponRack WeaponsRack { get; set; }
     public abstract WeaponType Type { get; }
     public abstract WeaponRarity Rarity { get; }
     public abstract WeaponSize Size { get; }
@@ -14,9 +16,7 @@ public abstract class WeaponProducer : MonoBehaviour
     public abstract float ProductionTime { get; }
     public abstract bool IsBusy { get; set; }
     public abstract bool IsFull { get; set; }
-    public abstract Transform[] SmallProductsTr { get; }
-    public abstract Transform[] MediumProductsTr { get; }
-    public abstract Transform[] LargeProductsTr { get; }
+    public abstract Transform[] ProductTr { get; set; }
     public abstract List<Weapon> SmallProducts { get; }
     public abstract List<Weapon> MediumProducts { get; }
     public abstract List<Weapon> LargeProducts { get; }

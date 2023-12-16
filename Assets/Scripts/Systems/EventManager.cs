@@ -12,6 +12,7 @@ public static class EventManager
     public static Action<int> OnPayCurrency;
     public static Action<Resource> OnTakeResource, OnPayFirstResource, OnPayResource;
     public static Action<IronProducer> OnForgeUnlocked;
+    public static Action<WeaponProducer> OnAnvilUnlocked, OnAnyAnvilUnlocked;
 
     public static void InvokeGameLaunched()
     {
@@ -39,6 +40,19 @@ public static class EventManager
     {
         OnForgeUnlocked?.Invoke(forge);
         UnityEngine.Debug.Log("Event: ForgeUnlocked");
+    }
+
+    public static void InvokeAnvilUnlocked(WeaponProducer weaponProducer)
+    {
+        if (weaponProducer is AxeProducer)
+            OnAnvilUnlocked?.Invoke(weaponProducer as AxeProducer);
+
+        UnityEngine.Debug.Log("Event: AnvilUnlocked");
+    }
+    public static void InvokeAnyAnvilUnlocked(WeaponProducer weaponProducer)
+    {
+        OnAnyAnvilUnlocked?.Invoke(weaponProducer);
+        UnityEngine.Debug.Log("Event: AnyAnvilUnlocked");
     }
 
     public static void InvokeHoldResource(bool isHoldingResource)

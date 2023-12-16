@@ -386,7 +386,7 @@ Transform:
   - {fileID: 5948885059107913974}
   - {fileID: 2198735135620575176}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4020614477712014067
 BoxCollider:
@@ -421,6 +421,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1039611d7879a7e4dbcaf69c768cfb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _smallProductsTr:
+  - {fileID: 538582623668571388}
+  - {fileID: 8132555427994454530}
+  - {fileID: 6885614100427995189}
+  - {fileID: 6304387132184736604}
+  - {fileID: 3904930188750879689}
+  - {fileID: 3128567031315351240}
+  - {fileID: 8586790054416571471}
+  - {fileID: 1685865702040739123}
+  - {fileID: 4826367585249135775}
+  - {fileID: 878282462129140236}
+  - {fileID: 893786776670886783}
+  - {fileID: 8017003052755092921}
+  - {fileID: 4737224030301788590}
+  - {fileID: 9083829421433964414}
+  _mediumProductsTr:
+  - {fileID: 4703692872581210149}
+  - {fileID: 1327369320841438660}
+  - {fileID: 2013179325761215035}
+  - {fileID: 7457916268458326855}
+  - {fileID: 4333916904117548878}
+  - {fileID: 8014751284146253275}
+  - {fileID: 6524202288864095559}
+  - {fileID: 9019177309033790232}
+  - {fileID: 3285995787341987424}
+  - {fileID: 300702281101651532}
+  _largeProductsTr:
+  - {fileID: 2073110410214381778}
+  - {fileID: 3366513897757991253}
 --- !u!1 &2600860197964514958
 GameObject:
   m_ObjectHideFlags: 0

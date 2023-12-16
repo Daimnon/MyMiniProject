@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponPool: {fileID: 0}
   _resourcePool: {fileID: 0}
+  _weaponRack: {fileID: 0}
   _weaponType: 0
   _weaponRarity: 0
   _weaponSize: 0

@@ -10,7 +10,10 @@ public class AxeProducer : WeaponProducer
     public override WeaponObjectPool WeaponPool { get => _weaponPool; set => _weaponPool = value; }
 
     [SerializeField] private ResourceObjectPool _resourcePool;
-    [SerializeField] private WeaponsRack _weaponRack;
+    public override ResourceObjectPool ResourcePool { get => _resourcePool; set => _resourcePool = value; }
+
+    [SerializeField] private WeaponRack _weaponsRack;
+    public override WeaponRack WeaponsRack { get => _weaponsRack; set => _weaponsRack = value; }
 
     [Header("Production Details")]
     [SerializeField] private WeaponType _weaponType = WeaponType.Axe;
@@ -41,14 +44,8 @@ public class AxeProducer : WeaponProducer
     [SerializeField] private int _currentIronCount = 0;
 
     [Header("Product Placements")]
-    [SerializeField] private Transform[] _smallProductsTr;
-    public override Transform[] SmallProductsTr => _smallProductsTr;
-
-    [SerializeField] private Transform[] _mediumProductsTr;
-    public override Transform[] MediumProductsTr => _mediumProductsTr;
-
-    [SerializeField] private Transform[] _largeProductsTr;
-    public override Transform[] LargeProductsTr => _largeProductsTr;
+    private Transform[] _productTr;
+    public override Transform[] ProductTr { get; set; }
 
     private List<Weapon> _smallProducts;
     public override List<Weapon> SmallProducts => _smallProducts;
@@ -71,7 +68,9 @@ public class AxeProducer : WeaponProducer
     }
     private void Start()
     {
+        EventManager.InvokeAnyAnvilUnlocked(this);
         Initialize();
+        _resourcePool = GameManager.Instance.ResourcePool;
 
         if (_requiredIron == null)
             _requiredIron = new int[_weaponPool.UniqueWeaponsCount];
@@ -103,23 +102,23 @@ public class AxeProducer : WeaponProducer
         {
             case WeaponSize.Small:
                 currentProducts = _smallProducts;
-                productsTr = _smallProductsTr;
+                productsTr = _weaponsRack.SmallProductsTr;
                 break;
             case WeaponSize.Medium:
                 currentProducts = _mediumProducts;
-                productsTr = _mediumProductsTr;
+                productsTr = _weaponsRack.MediumProductsTr;
                 break;
             case WeaponSize.Large:
                 currentProducts = _largeProducts;
-                productsTr = _largeProductsTr;
+                productsTr = _weaponsRack.LargeProductsTr;
                 break;
             default:
                 currentProducts = _smallProducts;
-                productsTr = _smallProductsTr;
+                productsTr = _weaponsRack.SmallProductsTr;
                 break;
         }
 
-        _weaponRack.Placements ??= productsTr; // if null get ref to productsTr
+        _weaponsRack.Placements ??= productsTr; // if null get ref to productsTr
 
         int productCount = _smallProducts.Count + _mediumProducts.Count + _largeProducts.Count;
         if (productCount < _maxProducts && productsTr[productCount].childCount < 1)
@@ -129,7 +128,7 @@ public class AxeProducer : WeaponProducer
             newWeapon.transform.localPosition = Vector3.zero;
             newWeapon.transform.localRotation = Quaternion.identity;
             currentProducts.Add(newWeapon);
-            _weaponRack.Weapons = currentProducts;
+            _weaponsRack.Weapons = currentProducts;
             _isBusy = false;
 
             if (productCount == _maxProducts)
