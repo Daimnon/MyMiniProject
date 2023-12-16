@@ -11,7 +11,6 @@ public class Unlocker : MonoBehaviour
     [SerializeField] protected Transform _spawnPos;
     [SerializeField] private TextMeshProUGUI _currentPriceTxt;
     [SerializeField] private int _priceToUnlock = 3, _amountToCharge = 1;
-    [SerializeField] private bool _isForge = false;
 
     private PlayerInventory _playerInventory;
     private const string _playerTag = "Player";
@@ -45,14 +44,4 @@ public class Unlocker : MonoBehaviour
     {
         SpawnNewProp();
     }
-
-    /*[SerializeField] private Transform[] _edgeSprites;
-      [SerializeField] private bool _isIdle = true;*/
-    /*private void Update()
-      {
-        if (!_isIdle)
-            return;
-
-        // breathing animation for edge pieces
-      }*/
 }
