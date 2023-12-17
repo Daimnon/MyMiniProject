@@ -38,6 +38,11 @@ public enum WeaponSize
     Medium,
     Large
 }
+public enum AdventurerType
+{
+    Potions,
+    AxeCommonSmall
+}
 
 public class GameManager : MonoBehaviour
 {

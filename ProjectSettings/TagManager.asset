@@ -7,6 +7,8 @@ TagManager:
   - Animal
   - Water
   - AI
+  - ResourceCustomer
+  - WeaponCustomer
   layers:
   - Default
   - TransparentFX

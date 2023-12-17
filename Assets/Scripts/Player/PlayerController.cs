@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem.EnhancedTouch;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
     [SerializeField] Animator _playerAnimator;
     [SerializeField] private TouchFloatStick _stick;
@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
         ETouch.Touch.onFingerUp -= OnFingerUp;
         ETouch.Touch.onFingerMove -= OnFingerMove;
         EnhancedTouchSupport.Disable();
+        EventManager.OnHoldResource -= OnHoldResource;
     }
 
     private void OnFingerMove(Finger finger)
