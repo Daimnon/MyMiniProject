@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trader : MonoBehaviour
+public class WeaponTrader : MonoBehaviour
 {
     [SerializeField] private GameObject _currencyPrefab;
     public GameObject CurrencyPrefab => _currencyPrefab;
