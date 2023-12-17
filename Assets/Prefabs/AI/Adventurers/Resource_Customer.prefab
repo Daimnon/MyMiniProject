@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8586376982801888575}
   m_Layer: 0
-  m_Name: Inventory_Small_Weapon_Pos
+  m_Name: Inventory_Small_Resource_Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ Transform:
   - {fileID: 8662470385666552932}
   - {fileID: 8586376982801888575}
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!136 &169646066333801558
 CapsuleCollider:
@@ -262,6 +262,7 @@ MonoBehaviour:
   _idleGestureTime: 7.5
   _adventurerType: 0
   _agent: {fileID: 4746664996494602014}
+  _itemPos: {fileID: 8586376982801888575}
   _lookAtOffset: 2
 --- !u!1 &3558413270385578474
 GameObject:

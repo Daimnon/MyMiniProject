@@ -71,7 +71,7 @@ public class WeaponObjectPool : MonoBehaviour
         // if reaches here than something went wrong
         return null;
     }
-    public void ReturnResourceToPool(Weapon weapon)
+    public void ReturnWeaponToPool(Weapon weapon)
     {
         weapon.gameObject.SetActive(false);
         weapon.transform.SetParent(transform);

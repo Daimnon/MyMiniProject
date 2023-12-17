@@ -121,7 +121,6 @@ public class PlayerInventory : MonoBehaviour
         }
 
         Resource resourceToPay = _resources[_resources.Count - 1];
-        _resourceObjectPool.ReturnResourceToPool(resourceToPay);
         _resources.Remove(resourceToPay);
         _resourceCount--;
         resourceToPay.IsInInventory = false;

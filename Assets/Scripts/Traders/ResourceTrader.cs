@@ -39,7 +39,7 @@ public class ResourceTrader : Trader
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(_resourceCustomer) || _adventurers.Count < 1)
+        if (other.CompareTag(_resourceCustomer) && _adventurers.Count < 1)
         {
             Adventurer adventurer = other.GetComponent<Adventurer>();
 

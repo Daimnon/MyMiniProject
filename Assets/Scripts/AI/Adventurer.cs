@@ -21,6 +21,9 @@ public class Adventurer : Character
     [SerializeField] private Transform _itemPos;
     [SerializeField] private float _lookAtOffset = 2.0f;
 
+    private ResourceObjectPool _resourcePool = null;
+    private Resource _resource = null;
+
     private WeaponObjectPool _weaponPool = null;
     private Weapon _weapon = null;
 
@@ -42,6 +45,9 @@ public class Adventurer : Character
     private void Start()
     {
         _agent.SetDestination(_tradingTr.position);
+        _resourcePool = GameManager.Instance.ResourcePool;
+        _weaponPool = GameManager.Instance.WeaponPool;
+
         Vector3 lookAtPos = _tradingTr.position;
         lookAtPos.x += _lookAtOffset;
         _agent.transform.LookAt(lookAtPos, Vector3.up);
@@ -72,20 +78,26 @@ public class Adventurer : Character
         // Check if the agent has reached the current target
         if (!_agent.pathPending && _agent.remainingDistance < 0.1f)
         {
-            // Perform your action here
             if (!_hasBoughtItem)
                 return;
 
-            // Switch to the next target position
-            if (_agent.destination == _tradingTr.position)
+            Vector2 correctDestination = new(_agent.destination.x, _agent.destination.z);
+            Vector2 correctTarget = new(_tradingTr.position.x, _tradingTr.position.z);
+
+            if (correctDestination == correctTarget)
             {
                 _agent.SetDestination(_exitTr.position);
                 _agent.transform.LookAt(_exitTr.position, Vector3.up);
             }
-            else
+            else if (gameObject.CompareTag(_resourceCustomerTag))
             {
-                // Destroy the GameObject when it reaches the second target position
-                _weaponPool.ReturnResourceToPool(_weapon);
+                _resourcePool.ReturnResourceToPool(_resource);
+                _resource = null;
+                Destroy(gameObject);
+            }
+            else if (gameObject.CompareTag(_weaponCustomerTag))
+            {
+                _weaponPool.ReturnWeaponToPool(_weapon);
                 _weapon = null;
                 Destroy(gameObject);
             }
@@ -106,14 +118,17 @@ public class Adventurer : Character
 
         if (gameObject.CompareTag(_resourceCustomerTag))
         {
-            //inventory.PayResource()
+            _resource = inventory.PayFirstResource();
+            _resource.transform.parent = _itemPos;
+            _resource.transform.localPosition = Vector3.zero;
+            _resource.transform.localRotation = Quaternion.identity;
         }
         else if (gameObject.CompareTag(_weaponCustomerTag))
         {
             _weapon = inventory.GiveWeapon();
             _weapon.transform.parent = _itemPos;
-            _weapon.transform.position = Vector3.zero;
-            _weapon.transform.rotation = Quaternion.identity;
+            _weapon.transform.localPosition = Vector3.zero;
+            _weapon.transform.localRotation = Quaternion.identity;
         }
     }
 }

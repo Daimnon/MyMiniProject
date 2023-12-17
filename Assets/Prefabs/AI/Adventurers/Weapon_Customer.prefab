@@ -67,7 +67,7 @@ Transform:
   - {fileID: 1040111979605727335}
   - {fileID: 1289757648069721294}
   m_Father: {fileID: 0}
-  m_RootOrder: 39
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!136 &7719212122446256874
 CapsuleCollider:
@@ -157,6 +157,7 @@ MonoBehaviour:
   _idleGestureTime: 7.5
   _adventurerType: 1
   _agent: {fileID: 8267879721297854951}
+  _itemPos: {fileID: 1289757648069721294}
   _lookAtOffset: 2
 --- !u!1 &788179779633666546
 GameObject:
