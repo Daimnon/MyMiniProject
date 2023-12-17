@@ -18,13 +18,22 @@ public class Adventurer : Character
     public AdventurerType AdventurerType => _adventurerType;
 
     [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Transform _itemPos;
     [SerializeField] private float _lookAtOffset = 2.0f;
+
+    private WeaponObjectPool _weaponPool = null;
+    private Weapon _weapon = null;
 
     private Transform _tradingTr = null;
     public Transform TradingTr { get => _tradingTr; set => _tradingTr = value; }
 
     private Transform _exitTr = null;
     public Transform ExitTr { get => _exitTr; set => _exitTr = value; }
+
+    private bool _hasBoughtItem = false;
+    public bool HasBoughtItem => _hasBoughtItem;
+
+    private const string _resourceCustomerTag = "ResourceCustomer", _weaponCustomerTag = "WeaponCustomer";
 
     private void OnEnable()
     {
@@ -64,6 +73,8 @@ public class Adventurer : Character
         if (!_agent.pathPending && _agent.remainingDistance < 0.1f)
         {
             // Perform your action here
+            if (!_hasBoughtItem)
+                return;
 
             // Switch to the next target position
             if (_agent.destination == _tradingTr.position)
@@ -74,6 +85,8 @@ public class Adventurer : Character
             else
             {
                 // Destroy the GameObject when it reaches the second target position
+                _weaponPool.ReturnResourceToPool(_weapon);
+                _weapon = null;
                 Destroy(gameObject);
             }
         }
@@ -86,5 +99,21 @@ public class Adventurer : Character
     private void OnHoldResource(bool isHoldingResource) // nned to tweak event
     {
         _aiAnimator.SetBool("Is Holding", isHoldingResource);
+    }
+    public void BuyItem(PlayerInventory inventory)
+    {
+        _hasBoughtItem = true;
+
+        if (gameObject.CompareTag(_resourceCustomerTag))
+        {
+            //inventory.PayResource()
+        }
+        else if (gameObject.CompareTag(_weaponCustomerTag))
+        {
+            _weapon = inventory.GiveWeapon();
+            _weapon.transform.parent = _itemPos;
+            _weapon.transform.position = Vector3.zero;
+            _weapon.transform.rotation = Quaternion.identity;
+        }
     }
 }

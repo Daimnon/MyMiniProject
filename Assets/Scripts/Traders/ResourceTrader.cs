@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceTrader : MonoBehaviour
+public class ResourceTrader : Trader
 {
     [SerializeField] private GameObject _currencyPrefab;
     public GameObject CurrencyPrefab => _currencyPrefab;
@@ -15,6 +15,7 @@ public class ResourceTrader : MonoBehaviour
     private CurrencyObjectPool _currencyObjectPool;
     private PlayerInventory _playerInventory;
     private List<Adventurer> _adventurers;
+    private const string _resourceCustomer = "ResourceCustomer";
     private const string _playerTag = "Player";
     private const string _aiTag = "AI";
 
@@ -38,6 +39,17 @@ public class ResourceTrader : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag(_resourceCustomer) || _adventurers.Count < 1)
+        {
+            Adventurer adventurer = other.GetComponent<Adventurer>();
+
+            if (!adventurer.HasBoughtItem && _playerInventory)
+            {
+                adventurer.BuyItem(_playerInventory);
+                return;
+            }
+        }
+
         if (!other.CompareTag(_playerTag) || _adventurers.Count < 1)
             return;
 

@@ -71,11 +71,11 @@ public class WeaponObjectPool : MonoBehaviour
         // if reaches here than something went wrong
         return null;
     }
-    public void ReturnResourceToPool(Resource resource)
+    public void ReturnResourceToPool(Weapon weapon)
     {
-        resource.gameObject.SetActive(false);
-        resource.transform.SetParent(transform);
-        resource.transform.position = Vector3.zero;
+        weapon.gameObject.SetActive(false);
+        weapon.transform.SetParent(transform);
+        weapon.transform.position = Vector3.zero;
     }
 
     private void OnLevelLaunched()
