@@ -15,6 +15,10 @@ public class AIManager : MonoBehaviour
 
     private const string _resourceCustomerTag = "ResourceCustomer", _weaponCustomer = "WeaponCustomer";
 
+    private void OnEnable()
+    {
+        EventManager.OnWeaponTraderUnlocked += OnWeaponTraderUnlocked;
+    }
     private void Start()
     {
         for (int i = 0; i < testingAdventurers.Length; i++)
@@ -31,5 +35,10 @@ public class AIManager : MonoBehaviour
                 testingAdventurers[i].ExitTr = _weaponExitTr;
             }
         }
+    }
+
+    public void OnWeaponTraderUnlocked(WeaponTrader weaponTrader)
+    {
+        //_weaponTradingTr = weaponTrader.tr
     }
 }

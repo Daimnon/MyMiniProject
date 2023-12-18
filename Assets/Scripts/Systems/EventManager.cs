@@ -8,10 +8,11 @@ public static class EventManager
     public static Action OnGameLaunched, OnLevelLaunched, OnOpenMenu;
     public static Action OnBakeNavMesh;
     public static Action OnUnlock;
-    public static Action<bool> OnHoldResource, OnHoldWeapon;
     public static Action<int> OnEarnCurrency;
     public static Action<int> OnPayCurrency;
+    public static Action<Character, bool> OnHoldResource, OnHoldWeapon;
     public static Action<Resource> OnTakeResource, OnPayFirstResource, OnPayResource;
+    public static Action<WeaponTrader> OnWeaponTraderUnlocked;
     public static Action<IronProducer> OnForgeUnlocked;
     public static Action<WeaponProducer> OnAnvilUnlocked, OnAnyAnvilUnlocked;
 
@@ -43,14 +44,14 @@ public static class EventManager
         UnityEngine.Debug.Log("Event: BakeNavMesh");
     }
 
-    public static void InvokeHoldResource(bool isHoldingResource)
+    public static void InvokeHoldResource(Character chara, bool isHoldingResource)
     {
-        OnHoldResource?.Invoke(isHoldingResource);
+        OnHoldResource?.Invoke(chara, isHoldingResource);
         UnityEngine.Debug.Log("Event: HoldResource changed");
     }
-    public static void InvokeHoldWeapon(bool isHoldingWeapon)
+    public static void InvokeHoldWeapon(Character chara, bool isHoldingWeapon)
     {
-        OnHoldWeapon?.Invoke(isHoldingWeapon);
+        OnHoldWeapon?.Invoke(chara, isHoldingWeapon);
         UnityEngine.Debug.Log("Event: HoldWeapon changed");
     }
 
@@ -91,6 +92,12 @@ public static class EventManager
             OnPayResource?.Invoke(resource);
             UnityEngine.Debug.Log($"Event: PayResource, ResourceType: {resource.Type.ToString()}");
         }
+    }
+
+    public static void InvokeTraderUnlocked(WeaponTrader weaponTrader)
+    {
+        OnWeaponTraderUnlocked?.Invoke(weaponTrader);
+        UnityEngine.Debug.Log("Event: WeaponTraderUnlocked");
     }
 
     public static void InvokeForgeUnlocked(IronProducer forge)

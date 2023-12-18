@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CurrencyObjectPool _currencyPool;
     public CurrencyObjectPool CurrencyPool => _currencyPool;
 
+    [SerializeField] private AIObjectPool _aiPool;
+    public AIObjectPool AiPool => _aiPool;
+
     [SerializeField] private ResourceObjectPool _resourcePool;
     public ResourceObjectPool ResourcePool => _resourcePool;
 

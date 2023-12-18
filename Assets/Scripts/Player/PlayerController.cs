@@ -132,8 +132,9 @@ public class PlayerController : Character
         return stickPos;
     }
 
-    private void OnHoldResource(bool isHoldingResource)
+    private void OnHoldResource(Character chara, bool isHoldingResource)
     {
-        _playerAnimator.SetBool("Is Holding", isHoldingResource);
+        if (chara is PlayerInventory || chara is PlayerController)
+            _playerAnimator.SetBool("Is Holding", isHoldingResource);
     }
 }

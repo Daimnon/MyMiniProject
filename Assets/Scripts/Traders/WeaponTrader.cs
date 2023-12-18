@@ -47,7 +47,7 @@ public class WeaponTrader : Trader
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_aiTag))
-            _adventurers.Remove(other.GetComponent<Adventurer>());
+            _adventurers.Remove(other.GetComponent<Adventurer>()); // maybe should remove
         else if (other.CompareTag(_playerTag)) // do exiting animation on self
             _playerInventory = null;
         else

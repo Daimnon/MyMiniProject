@@ -1806,7 +1806,7 @@ PrefabInstance:
     - target: {fileID: 1746482788205914872, guid: b992284f00f272b41b93470d683ecf1a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1746482788205914872, guid: b992284f00f272b41b93470d683ecf1a,
         type: 3}
@@ -2906,6 +2906,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4829266799989327031, guid: fa88904a3880900479302fe6b3dcc940,
         type: 3}
+      propertyPath: _aiPool
+      value: 
+      objectReference: {fileID: 1427415746}
+    - target: {fileID: 4829266799989327031, guid: fa88904a3880900479302fe6b3dcc940,
+        type: 3}
       propertyPath: _mainCam
       value: 
       objectReference: {fileID: 788670055}
@@ -2945,7 +2950,7 @@ PrefabInstance:
     - target: {fileID: 8220903183152417119, guid: 4d1e5555eb4fcbe499d433adaf035e19,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8220903183152417119, guid: 4d1e5555eb4fcbe499d433adaf035e19,
         type: 3}

@@ -21,6 +21,8 @@ public class Adventurer : Character
     [SerializeField] private Transform _itemPos;
     [SerializeField] private float _lookAtOffset = 2.0f;
 
+    private AIObjectPool _aiPool = null;
+
     private ResourceObjectPool _resourcePool = null;
     private Resource _resource = null;
 
@@ -45,6 +47,7 @@ public class Adventurer : Character
     private void Start()
     {
         _agent.SetDestination(_tradingTr.position);
+        _aiPool = GameManager.Instance.AiPool;
         _resourcePool = GameManager.Instance.ResourcePool;
         _weaponPool = GameManager.Instance.WeaponPool;
 
@@ -93,13 +96,15 @@ public class Adventurer : Character
             {
                 _resourcePool.ReturnResourceToPool(_resource);
                 _resource = null;
-                Destroy(gameObject);
+                EventManager.InvokeHoldResource(this, false);
+                _aiPool.ReturnAdventurerToPool(this);
             }
             else if (gameObject.CompareTag(_weaponCustomerTag))
             {
                 _weaponPool.ReturnWeaponToPool(_weapon);
                 _weapon = null;
-                Destroy(gameObject);
+                EventManager.InvokeHoldWeapon(this, false);
+                _aiPool.ReturnAdventurerToPool(this);
             }
         }
     }
@@ -108,9 +113,10 @@ public class Adventurer : Character
         EventManager.OnHoldResource -= OnHoldResource;
     }
 
-    private void OnHoldResource(bool isHoldingResource) // nned to tweak event
+    private void OnHoldResource(Character chara, bool isHoldingResource) // nned to tweak event
     {
-        _aiAnimator.SetBool("Is Holding", isHoldingResource);
+        if (chara is Adventurer && chara as Adventurer == this)
+            _aiAnimator.SetBool("Is Holding", isHoldingResource);
     }
     public void BuyItem(PlayerInventory inventory)
     {
@@ -122,6 +128,7 @@ public class Adventurer : Character
             _resource.transform.parent = _itemPos;
             _resource.transform.localPosition = Vector3.zero;
             _resource.transform.localRotation = Quaternion.identity;
+            EventManager.InvokeHoldResource(this, true);
         }
         else if (gameObject.CompareTag(_weaponCustomerTag))
         {
@@ -129,6 +136,7 @@ public class Adventurer : Character
             _weapon.transform.parent = _itemPos;
             _weapon.transform.localPosition = Vector3.zero;
             _weapon.transform.localRotation = Quaternion.identity;
+            EventManager.InvokeHoldWeapon(this, true);
         }
     }
 }

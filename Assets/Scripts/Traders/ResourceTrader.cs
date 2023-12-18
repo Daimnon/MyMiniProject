@@ -46,6 +46,7 @@ public class ResourceTrader : Trader
             if (!adventurer.HasBoughtItem && _playerInventory)
             {
                 adventurer.BuyItem(_playerInventory);
+                _adventurers.Remove(adventurer);
                 return;
             }
         }
@@ -63,7 +64,7 @@ public class ResourceTrader : Trader
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(_aiTag))
-            _adventurers.Remove(other.GetComponent<Adventurer>());
+            _adventurers.Remove(other.GetComponent<Adventurer>()); // maybe should remove
         else if (other.CompareTag(_playerTag)) // do exiting animation on self
             _playerInventory = null;
         else

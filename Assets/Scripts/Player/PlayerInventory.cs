@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : Character
 {
     [Header("Currency Data")]
     [SerializeField] private CurrencyObjectPool _currencyObjectPool;
@@ -53,7 +53,7 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         bool isHoldingResource = _resources.Count > 0 ? true : false;
-        EventManager.InvokeHoldResource(isHoldingResource);
+        EventManager.InvokeHoldResource(this, isHoldingResource);
     }
 
     private void ShowMaxResourcesText(bool shouldShow)
@@ -98,7 +98,7 @@ public class PlayerInventory : MonoBehaviour
         _resourceCount++;
 
         if (_resourceCount == 1)
-            EventManager.InvokeHoldResource(true);
+            EventManager.InvokeHoldResource(this, true);
 
         int lastResourceIndex = _resourceCount - 1;
         newResource.transform.SetParent(_resourcesTr[lastResourceIndex]);
@@ -126,7 +126,7 @@ public class PlayerInventory : MonoBehaviour
         resourceToPay.IsInInventory = false;
 
         if (_resourceCount == 0)
-            EventManager.InvokeHoldResource(false);
+            EventManager.InvokeHoldResource(this, false);
 
         _canvasRTr.gameObject.SetActive(false);
         return resourceToPay;
@@ -160,7 +160,7 @@ public class PlayerInventory : MonoBehaviour
         resourceToGive.IsInInventory = false;
 
         if (_resourceCount == 0)
-            EventManager.InvokeHoldResource(false);
+            EventManager.InvokeHoldResource(this, false);
 
         _canvasRTr.gameObject.SetActive(false);
 
@@ -175,7 +175,7 @@ public class PlayerInventory : MonoBehaviour
             _weapon.Remove(_weapon[^1]);
 
         _weapon.Add(newWeapon);
-        EventManager.InvokeHoldWeapon(true);
+        EventManager.InvokeHoldWeapon(this, true);
 
         int weaponTrIndex = (int)newWeapon.Size;
         newWeapon.transform.SetParent(_weaponsTr[weaponTrIndex]);
