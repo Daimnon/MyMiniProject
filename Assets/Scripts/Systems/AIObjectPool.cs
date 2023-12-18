@@ -14,7 +14,7 @@ public class AIObjectPool : MonoBehaviour
     [SerializeField] private Transform[] _spawnPointsTr;
     [SerializeField] private int _spawnAmount;
     [SerializeField] private float _spawnDelay, _respawnDelay;
-    [SerializeField] private AdventurerType[] _spawnTypes;
+    //[SerializeField] private AdventurerType[] _spawnTypes;
 
     private WaitForSeconds _waitForRespawn;
     private const string _resourceCustomerTag = "ResourceCustomer", _weaponCustomerTag = "WeaponCustomer";
@@ -44,6 +44,20 @@ public class AIObjectPool : MonoBehaviour
                 _aiPool.Add(adventurer);
             }
         }
+
+        int amountSpawned = 0;
+        for (int i = 0; i < _aiPool.Count; i++)
+        {
+            Adventurer adventurer = _aiPool[i];
+            if (adventurer.CompareTag(_resourceCustomerTag))
+            {
+                SpawnAdventurer(adventurer);
+                amountSpawned++;
+
+                if (amountSpawned >= _spawnAmount)
+                    break;
+            }
+        }
     }
 
     public Adventurer GetAdventurerFromPool(int adventurerTypeIndex)
@@ -71,23 +85,34 @@ public class AIObjectPool : MonoBehaviour
     }
     public Adventurer GetAdventurerFromPool(Adventurer adventurer)
     {
+        if (!_aiPool.Contains(adventurer))
+        {
+            Debug.Log("Adventurer not present is AI Pool");
+            return null;
+        }
+
         if (!adventurer.gameObject.activeSelf)
+        {
             adventurer.gameObject.SetActive(true);
-
-        adventurer.transform.parent = null;
-        if (adventurer.CompareTag(_resourceCustomerTag))
-        {
-            adventurer.transform.position = _spawnPointsTr[0].position;
-            adventurer.transform.rotation = _spawnPointsTr[0].rotation;
+            adventurer.transform.parent = null;
+            adventurer.IsAlive = true;
         }
-        else if (adventurer.CompareTag(_weaponCustomerTag))
-        {
-            adventurer.transform.position = _spawnPointsTr[1].position;
-            adventurer.transform.rotation = _spawnPointsTr[1].rotation;
-        }
-        adventurer.IsAlive = true;
-
         return adventurer;
+    }
+    public void SpawnAdventurer(Adventurer adventurer)
+    {
+        Adventurer respawnedAdventurer = GetAdventurerFromPool(adventurer);
+        respawnedAdventurer.Agent.enabled = false;
+
+        if (adventurer.CompareTag(_resourceCustomerTag))
+            respawnedAdventurer.transform.SetParent(_spawnPointsTr[0]);
+        else if (adventurer.CompareTag(_weaponCustomerTag))
+            respawnedAdventurer.transform.SetParent(_spawnPointsTr[1]);
+
+        respawnedAdventurer.transform.localPosition = Vector3.zero;
+        respawnedAdventurer.transform.localRotation = Quaternion.identity;
+        respawnedAdventurer.transform.parent = null;
+        EventManager.InvokeAdventurerSpawned(respawnedAdventurer);
     }
     public void ReturnAdventurerToPool(Adventurer adventurer)
     {
@@ -95,22 +120,32 @@ public class AIObjectPool : MonoBehaviour
         adventurer.transform.SetParent(transform);
         adventurer.transform.position = Vector3.zero;
     }
+
     public void RespawnAdventurer(Adventurer adventurer)
     {
         StartCoroutine(ResetAdventurer(adventurer));
     }
-
     private IEnumerator ResetAdventurer(Adventurer adventurer)
     {
         ReturnAdventurerToPool(adventurer);
         yield return _waitForRespawn;
 
         Adventurer respawnedAdventurer = GetAdventurerFromPool(adventurer);
-        EventManager.InvokeAdventurerRespawned(respawnedAdventurer);
+        respawnedAdventurer.Agent.enabled = false;
+
+        if (adventurer.CompareTag(_resourceCustomerTag))
+            respawnedAdventurer.transform.SetParent(_spawnPointsTr[0]);
+        else if (adventurer.CompareTag(_weaponCustomerTag))
+            respawnedAdventurer.transform.SetParent(_spawnPointsTr[1]);
+
+        respawnedAdventurer.transform.localPosition = Vector3.zero;
+        respawnedAdventurer.transform.localRotation = Quaternion.identity;
+        respawnedAdventurer.transform.parent = null;
+        EventManager.InvokeAdventurerSpawned(respawnedAdventurer);
     }
+
     private void OnLevelLaunched()
     {
         Initialize();
     }
-
 }

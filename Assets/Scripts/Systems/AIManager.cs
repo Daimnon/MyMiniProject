@@ -9,36 +9,23 @@ public class AIManager : MonoBehaviour
     [SerializeField] private Transform _weaponTradingTr, _weaponExitTr;
     [SerializeField] private List<Adventurer> _adventurers;
 
-    [SerializeField] private Adventurer[] testingAdventurers;
+    //[SerializeField] private Adventurer[] testingAdventurers;
 
     private const string _resourceCustomerTag = "ResourceCustomer", _weaponCustomer = "WeaponCustomer";
 
+    private void Awake()
+    {
+        _adventurers = new List<Adventurer>();
+    }
     private void OnEnable()
     {
         EventManager.OnWeaponTraderUnlocked += OnWeaponTraderUnlocked;
-        EventManager.OnAdventurerRespawned += OnAdventurerRespawned;
-    }
-    private void Start()
-    {
-        for (int i = 0; i < testingAdventurers.Length; i++)
-        {
-            Adventurer adventurer = testingAdventurers[i];
-            if (adventurer.CompareTag(_resourceCustomerTag))
-            {
-                testingAdventurers[i].TradingTr = _resourceTradingTr;
-                testingAdventurers[i].ExitTr = _resourceExitTr;
-            }
-            else if (adventurer.CompareTag(_weaponCustomer))
-            {
-                testingAdventurers[i].TradingTr = _weaponTradingTr;
-                testingAdventurers[i].ExitTr = _weaponExitTr;
-            }
-        }
+        EventManager.OnAdventurerSpawned += OnAdventurerSpawned;
     }
     private void OnDisable()
     {
         EventManager.OnWeaponTraderUnlocked -= OnWeaponTraderUnlocked;
-        EventManager.OnAdventurerRespawned -= OnAdventurerRespawned;
+        EventManager.OnAdventurerSpawned -= OnAdventurerSpawned;
     }
 
     private void OnWeaponTraderUnlocked(WeaponTrader weaponTrader)
@@ -46,7 +33,7 @@ public class AIManager : MonoBehaviour
        _weaponTradingTr = weaponTrader.TradingPos;
         // start spawning 
     }
-    private void OnAdventurerRespawned(Adventurer adventurer)
+    private void OnAdventurerSpawned(Adventurer adventurer)
     {
         if (adventurer.CompareTag(_resourceCustomerTag))
         {
@@ -59,6 +46,7 @@ public class AIManager : MonoBehaviour
             adventurer.ExitTr = _weaponExitTr;
         }
 
+        adventurer.StartRemotely();
         _adventurers.Add(adventurer);
     }
 }

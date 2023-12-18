@@ -21,6 +21,10 @@ public class LevelManager : MonoBehaviour
     {
         EventManager.OnUnlock -= OnUnlock;
     }
+    private void Start()
+    {
+        EventManager.InvokeLevelLaunched();
+    }
 
     private void OnUnlock()
     {

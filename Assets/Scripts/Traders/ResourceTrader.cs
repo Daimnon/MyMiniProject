@@ -13,6 +13,9 @@ public class ResourceTrader : Trader
     [SerializeField] private Transform _tradingPos;
     public override Transform TradingPos => _tradingPos;
 
+    [SerializeField] private float _tradingCamOffset = 4.0f;
+    public override float TradingCamOffset => _tradingCamOffset;
+
     [SerializeField] private int[] _conversionRates = new int[System.Enum.GetValues(typeof(ResourceType)).Length];
 
     private const string _resourceCustomer = "ResourceCustomer";
@@ -25,7 +28,12 @@ public class ResourceTrader : Trader
 
             if (!adventurer.HasBoughtItem && _playerInventory)
             {
-                adventurer.BuyItem(_playerInventory);
+                Object boughtItem = adventurer.BuyItem(_playerInventory);
+
+                if (boughtItem is not Resource)
+                    return;
+
+                SellResource((boughtItem as Resource).Type);
                 _adventurers.Remove(adventurer);
                 return;
             }

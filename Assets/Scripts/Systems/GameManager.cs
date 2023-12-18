@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Camera _mainCam;
     public Camera MainCam => _mainCam;
+
+    [SerializeField] private CinemachineVirtualCamera _virtualCam;
+    public CinemachineVirtualCamera VirtualCam => _virtualCam;
 
     [SerializeField] private CurrencyObjectPool _currencyPool;
     public CurrencyObjectPool CurrencyPool => _currencyPool;
