@@ -15,6 +15,10 @@ public class WeaponTrader : Trader
 
     [SerializeField] private int[] _typePriceFactor = new int[3], _rarityPriceFactor = new int[3], _sizePriceFactor = new int[3];
 
+    private void Start()
+    {
+        EventManager.InvokeWeaponTraderUnlocked(this);
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag(_playerTag) && _playerInventory.Weapon[0] && _adventurers.Count > 0)

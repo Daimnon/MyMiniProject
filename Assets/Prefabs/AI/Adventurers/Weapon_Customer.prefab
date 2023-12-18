@@ -67,7 +67,7 @@ Transform:
   - {fileID: 1040111979605727335}
   - {fileID: 1289757648069721294}
   m_Father: {fileID: 0}
-  m_RootOrder: 40
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7719212122446256874
 CapsuleCollider:
@@ -155,10 +155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aiAnimator: {fileID: 4646848291081790487}
   _idleGestureTime: 7.5
-  _adventurerType: 1
-  _agent: {fileID: 8267879721297854951}
+  _type: 1
   _itemPos: {fileID: 1289757648069721294}
   _lookAtOffset: 2
+  _agent: {fileID: 8267879721297854951}
 --- !u!1 &788179779633666546
 GameObject:
   m_ObjectHideFlags: 0

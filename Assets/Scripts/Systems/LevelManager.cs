@@ -29,7 +29,9 @@ public class LevelManager : MonoBehaviour
     private void OnUnlock()
     {
         _unlockersUsed++;
-        _allUnlockers[_unlockersUsed].gameObject.SetActive(true);
+
+        if (_allUnlockers.Length > _unlockersUsed)
+            _allUnlockers[_unlockersUsed].gameObject.SetActive(true);
     }
 
     /*private IEnumerator UnlockWithAnimation()

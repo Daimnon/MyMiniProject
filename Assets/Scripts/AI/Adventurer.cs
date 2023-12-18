@@ -14,8 +14,8 @@ public class Adventurer : Character
     private bool _isGesturing = false;
 
     [Header("AI Data")]
-    [SerializeField] private AdventurerType _adventurerType;
-    public AdventurerType AdventurerType => _adventurerType;
+    [SerializeField] private AdventurerType _type;
+    public AdventurerType Type => _type;
 
     [SerializeField] private Transform _itemPos;
     [SerializeField] private float _lookAtOffset = 2.0f;
@@ -130,7 +130,7 @@ public class Adventurer : Character
     {
         _agent.enabled = true;
         _agent.SetDestination(_tradingTr.position);
-        _aiPool = GameManager.Instance.AiPool;
+        _aiPool = GameManager.Instance.AIPool;
         _resourcePool = GameManager.Instance.ResourcePool;
         _weaponPool = GameManager.Instance.WeaponPool;
 

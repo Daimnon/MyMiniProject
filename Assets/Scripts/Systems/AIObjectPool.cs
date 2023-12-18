@@ -45,26 +45,14 @@ public class AIObjectPool : MonoBehaviour
             }
         }
 
-        int amountSpawned = 0;
-        for (int i = 0; i < _aiPool.Count; i++)
-        {
-            Adventurer adventurer = _aiPool[i];
-            if (adventurer.CompareTag(_resourceCustomerTag))
-            {
-                SpawnAdventurer(adventurer);
-                amountSpawned++;
-
-                if (amountSpawned >= _spawnAmount)
-                    break;
-            }
-        }
+        SpawnResourceAdventurer(AdventurerType.Potions);
     }
 
     public Adventurer GetAdventurerFromPool(int adventurerTypeIndex)
     {
         for (int i = 0; i < _aiPool.Count; i++)
         {
-            if (_aiPool[i].AdventurerType != (AdventurerType)adventurerTypeIndex)
+            if (_aiPool[i].Type != (AdventurerType)adventurerTypeIndex)
                 continue;
 
             Adventurer adventurer = _aiPool[i];
@@ -99,7 +87,8 @@ public class AIObjectPool : MonoBehaviour
         }
         return adventurer;
     }
-    public void SpawnAdventurer(Adventurer adventurer)
+
+    public Adventurer SpawnAdventurer(Adventurer adventurer)
     {
         Adventurer respawnedAdventurer = GetAdventurerFromPool(adventurer);
         respawnedAdventurer.Agent.enabled = false;
@@ -113,7 +102,9 @@ public class AIObjectPool : MonoBehaviour
         respawnedAdventurer.transform.localRotation = Quaternion.identity;
         respawnedAdventurer.transform.parent = null;
         EventManager.InvokeAdventurerSpawned(respawnedAdventurer);
+        return respawnedAdventurer;
     }
+    
     public void ReturnAdventurerToPool(Adventurer adventurer)
     {
         adventurer.gameObject.SetActive(false);
@@ -144,6 +135,38 @@ public class AIObjectPool : MonoBehaviour
         EventManager.InvokeAdventurerSpawned(respawnedAdventurer);
     }
 
+    public void SpawnResourceAdventurer(AdventurerType adventurerType)
+    {
+        int amountSpawned = 0;
+        for (int i = 0; i < _aiPool.Count; i++)
+        {
+            Adventurer adventurer = _aiPool[i];
+            if (adventurer.CompareTag(_resourceCustomerTag) && adventurer.Type == adventurerType)
+            {
+                SpawnAdventurer(adventurer);
+                amountSpawned++;
+
+                if (amountSpawned >= _spawnAmount)
+                    break;
+            }
+        }
+    }
+    public void SpawnWeaponAdventurer(AdventurerType adventurerType)
+    {
+        int amountSpawned = 0;
+        for (int i = 0; i < _aiPool.Count; i++)
+        {
+            Adventurer adventurer = _aiPool[i];
+            if (adventurer.CompareTag(_weaponCustomerTag) && adventurer.Type == adventurerType)
+            {
+                SpawnAdventurer(adventurer);
+                amountSpawned++;
+
+                if (amountSpawned >= _spawnAmount)
+                    break;
+            }
+        }
+    }
     private void OnLevelLaunched()
     {
         Initialize();

@@ -31,7 +31,7 @@ public class AIManager : MonoBehaviour
     private void OnWeaponTraderUnlocked(WeaponTrader weaponTrader)
     {
        _weaponTradingTr = weaponTrader.TradingPos;
-        // start spawning 
+        GameManager.Instance.AIPool.SpawnWeaponAdventurer(AdventurerType.AxeCommonSmall);
     }
     private void OnAdventurerSpawned(Adventurer adventurer)
     {

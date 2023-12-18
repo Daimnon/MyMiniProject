@@ -110,7 +110,7 @@ public static class EventManager
         }
     }
 
-    public static void InvokeTraderUnlocked(WeaponTrader weaponTrader)
+    public static void InvokeWeaponTraderUnlocked(WeaponTrader weaponTrader)
     {
         OnWeaponTraderUnlocked?.Invoke(weaponTrader);
         UnityEngine.Debug.Log("Event: WeaponTraderUnlocked");
