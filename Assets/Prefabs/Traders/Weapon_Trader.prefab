@@ -1678,7 +1678,7 @@ Transform:
   - {fileID: 6883673757256316840}
   - {fileID: 8804386467409439343}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &4548669346383922948
 BoxCollider:
@@ -1917,6 +1917,7 @@ MonoBehaviour:
   - {fileID: 2579357841280871531}
   - {fileID: 6871283955183886318}
   - {fileID: 3649454865900267589}
+  _tradingPos: {fileID: 8804386467409439343}
   _typePriceFactor: 010000000200000003000000
   _rarityPriceFactor: 010000000300000005000000
   _sizePriceFactor: 010000000200000004000000

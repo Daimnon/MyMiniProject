@@ -7,9 +7,7 @@ public class AIManager : MonoBehaviour
     [SerializeField] private AIObjectPool _aiPool;
     [SerializeField] private Transform _resourceTradingTr, _resourceExitTr;
     [SerializeField] private Transform _weaponTradingTr, _weaponExitTr;
-    [SerializeField] private int _spawnAmount;
-    [SerializeField] private float _spawnDelay;
-    [SerializeField] private AdventurerType[] _spawnTypes;
+    [SerializeField] private List<Adventurer> _adventurers;
 
     [SerializeField] private Adventurer[] testingAdventurers;
 
@@ -18,6 +16,7 @@ public class AIManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnWeaponTraderUnlocked += OnWeaponTraderUnlocked;
+        EventManager.OnAdventurerRespawned += OnAdventurerRespawned;
     }
     private void Start()
     {
@@ -36,9 +35,30 @@ public class AIManager : MonoBehaviour
             }
         }
     }
-
-    public void OnWeaponTraderUnlocked(WeaponTrader weaponTrader)
+    private void OnDisable()
     {
-        //_weaponTradingTr = weaponTrader.tr
+        EventManager.OnWeaponTraderUnlocked -= OnWeaponTraderUnlocked;
+        EventManager.OnAdventurerRespawned -= OnAdventurerRespawned;
+    }
+
+    private void OnWeaponTraderUnlocked(WeaponTrader weaponTrader)
+    {
+       _weaponTradingTr = weaponTrader.TradingPos;
+        // start spawning 
+    }
+    private void OnAdventurerRespawned(Adventurer adventurer)
+    {
+        if (adventurer.CompareTag(_resourceCustomerTag))
+        {
+            adventurer.TradingTr = _resourceTradingTr;
+            adventurer.ExitTr = _resourceExitTr;
+        }
+        else if (adventurer.CompareTag(_weaponCustomer))
+        {
+            adventurer.TradingTr = _weaponTradingTr;
+            adventurer.ExitTr = _weaponExitTr;
+        }
+
+        _adventurers.Add(adventurer);
     }
 }

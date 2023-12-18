@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance => _instance;
 
     [SerializeField] private Unlocker[] _allUnlockers;
+    public Unlocker[] AllUnlockers => _allUnlockers;
 
     private int _unlockersUsed = 0;
 

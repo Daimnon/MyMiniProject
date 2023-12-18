@@ -21,6 +21,18 @@ public class Adventurer : Character
     [SerializeField] private Transform _itemPos;
     [SerializeField] private float _lookAtOffset = 2.0f;
 
+    private Transform _tradingTr = null;
+    public Transform TradingTr { get => _tradingTr; set => _tradingTr = value; }
+
+    private Transform _exitTr = null;
+    public Transform ExitTr { get => _exitTr; set => _exitTr = value; }
+
+    private bool _isAlive = true;
+    public bool IsAlive { get => _isAlive; set => _isAlive = value; }
+
+    private bool _hasBoughtItem = false;
+    public bool HasBoughtItem => _hasBoughtItem;
+
     private AIObjectPool _aiPool = null;
 
     private ResourceObjectPool _resourcePool = null;
@@ -28,15 +40,6 @@ public class Adventurer : Character
 
     private WeaponObjectPool _weaponPool = null;
     private Weapon _weapon = null;
-
-    private Transform _tradingTr = null;
-    public Transform TradingTr { get => _tradingTr; set => _tradingTr = value; }
-
-    private Transform _exitTr = null;
-    public Transform ExitTr { get => _exitTr; set => _exitTr = value; }
-
-    private bool _hasBoughtItem = false;
-    public bool HasBoughtItem => _hasBoughtItem;
 
     private const string _resourceCustomerTag = "ResourceCustomer", _weaponCustomerTag = "WeaponCustomer";
 
@@ -79,7 +82,7 @@ public class Adventurer : Character
         }
 
         // Check if the agent has reached the current target
-        if (!_agent.pathPending && _agent.remainingDistance < 0.1f)
+        if (_isAlive && !_agent.pathPending && _agent.remainingDistance < 0.1f)
         {
             if (!_hasBoughtItem)
                 return;
@@ -94,17 +97,19 @@ public class Adventurer : Character
             }
             else if (gameObject.CompareTag(_resourceCustomerTag))
             {
+                _isAlive = false;
                 _resourcePool.ReturnResourceToPool(_resource);
                 _resource = null;
                 EventManager.InvokeHoldResource(this, false);
-                _aiPool.ReturnAdventurerToPool(this);
+                _aiPool.RespawnAdventurer(this);
             }
             else if (gameObject.CompareTag(_weaponCustomerTag))
             {
+                _isAlive = false;
                 _weaponPool.ReturnWeaponToPool(_weapon);
                 _weapon = null;
                 EventManager.InvokeHoldWeapon(this, false);
-                _aiPool.ReturnAdventurerToPool(this);
+                _aiPool.RespawnAdventurer(this);
             }
         }
     }
@@ -124,19 +129,19 @@ public class Adventurer : Character
 
         if (gameObject.CompareTag(_resourceCustomerTag))
         {
+            EventManager.InvokeHoldResource(this, true);
             _resource = inventory.PayFirstResource();
             _resource.transform.parent = _itemPos;
             _resource.transform.localPosition = Vector3.zero;
             _resource.transform.localRotation = Quaternion.identity;
-            EventManager.InvokeHoldResource(this, true);
         }
         else if (gameObject.CompareTag(_weaponCustomerTag))
         {
+            EventManager.InvokeHoldWeapon(this, true);
             _weapon = inventory.GiveWeapon();
             _weapon.transform.parent = _itemPos;
             _weapon.transform.localPosition = Vector3.zero;
             _weapon.transform.localRotation = Quaternion.identity;
-            EventManager.InvokeHoldWeapon(this, true);
         }
     }
 }

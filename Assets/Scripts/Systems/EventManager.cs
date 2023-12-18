@@ -11,6 +11,7 @@ public static class EventManager
     public static Action<int> OnEarnCurrency;
     public static Action<int> OnPayCurrency;
     public static Action<Character, bool> OnHoldResource, OnHoldWeapon;
+    public static Action<Adventurer> OnAdventurerRespawned;
     public static Action<Resource> OnTakeResource, OnPayFirstResource, OnPayResource;
     public static Action<WeaponTrader> OnWeaponTraderUnlocked;
     public static Action<IronProducer> OnForgeUnlocked;
@@ -46,11 +47,17 @@ public static class EventManager
 
     public static void InvokeHoldResource(Character chara, bool isHoldingResource)
     {
+        if (chara == null)
+            return;
+
         OnHoldResource?.Invoke(chara, isHoldingResource);
         UnityEngine.Debug.Log("Event: HoldResource changed");
     }
     public static void InvokeHoldWeapon(Character chara, bool isHoldingWeapon)
     {
+        if (chara == null)
+            return;
+
         OnHoldWeapon?.Invoke(chara, isHoldingWeapon);
         UnityEngine.Debug.Log("Event: HoldWeapon changed");
     }
@@ -67,6 +74,15 @@ public static class EventManager
     {
         OnPayCurrency?.Invoke(price);
         UnityEngine.Debug.Log($"Event: PayCurrency, Price: {price}");
+    }
+
+    public static void InvokeAdventurerRespawned(Adventurer adventurer)
+    {
+        if (adventurer != null)
+        {
+            OnAdventurerRespawned?.Invoke(adventurer);
+            UnityEngine.Debug.Log("Event: AdventurerRespawned");
+        }
     }
 
     public static void InvokeTakeResource(Resource resource)
