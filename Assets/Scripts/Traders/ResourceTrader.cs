@@ -13,9 +13,6 @@ public class ResourceTrader : Trader
     [SerializeField] private Transform _tradingPos;
     public override Transform TradingPos => _tradingPos;
 
-    [SerializeField] private float _tradingCamOffset = 4.0f;
-    public override float TradingCamOffset => _tradingCamOffset;
-
     [SerializeField] private int[] _conversionRates = new int[System.Enum.GetValues(typeof(ResourceType)).Length];
 
     private const string _resourceCustomer = "ResourceCustomer";

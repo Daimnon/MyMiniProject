@@ -8,7 +8,6 @@ public abstract class Trader : MonoBehaviour
     public abstract GameObject CurrencyPrefab { get; }
     public abstract Transform[] ProductsTr { get; }
     public abstract Transform TradingPos { get; }
-    public abstract float TradingCamOffset { get; }
 
     protected CurrencyObjectPool _currencyObjectPool;
     protected PlayerInventory _playerInventory;

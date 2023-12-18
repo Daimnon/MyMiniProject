@@ -13,9 +13,6 @@ public class WeaponTrader : Trader
     [SerializeField] private Transform _tradingPos;
     public override Transform TradingPos => _tradingPos;
 
-    [SerializeField] private float _tradingCamOffset = 4.0f;
-    public override float TradingCamOffset => _tradingCamOffset;
-
     [SerializeField] private int[] _typePriceFactor = new int[3], _rarityPriceFactor = new int[3], _sizePriceFactor = new int[3];
 
     private void OnTriggerStay(Collider other)
